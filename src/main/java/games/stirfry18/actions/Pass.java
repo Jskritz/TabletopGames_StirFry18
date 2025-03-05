@@ -2,11 +2,12 @@ package games.stirfry18.actions;
 
 import core.AbstractGameState;
 import core.actions.AbstractAction;
+import core.actions.DoNothing;
 import core.components.Component;
 
 
-public class Pass extends AbstractAction {
-    // cook and score. uses 3 to 5 ingredients and need at least 1 noodle, cannot use more than one of the same ingredient
+public class Pass extends DoNothing {
+    // passs and do nothing
 
     /**
      * Executes this action, applying its effect to the given game state. Can access any component IDs stored
@@ -20,34 +21,12 @@ public class Pass extends AbstractAction {
         return true;
     }
 
-    /**
-     * @return Make sure to return an exact <b>deep</b> copy of the object, including all of its variables.
-     * Make sure the return type is this class (e.g. GTAction) and NOT the super class AbstractAction.
-     * <p>If all variables in this class are final or effectively final (which they should be),
-     * then you can just return <code>`this`</code>.</p>
-     */
-    @Override
-    public Pass copy() {
-        // TODO: copy non-final variables appropriately
-        return this;
-    }
+
 
     @Override
     public boolean equals(Object obj) {
         // TODO: compare all other variables in the class
         return obj instanceof Pass;
-    }
-
-    @Override
-    public int hashCode() {
-        // TODO: return the hash of all other variables in the class
-        return 0;
-    }
-
-    @Override
-    public String toString() {
-        // TODO: Replace with appropriate string, including any action parameters
-        return "My action name";
     }
 
     /**

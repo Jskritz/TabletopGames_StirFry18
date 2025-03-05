@@ -142,12 +142,14 @@ public class SF18ForwardModel extends StandardForwardModel {
 
     @Override
     protected void _afterAction(AbstractGameState currentState, AbstractAction actionTaken) {
-        super._afterAction(currentState, actionTaken);
+        //super._afterAction(currentState, actionTaken);
         if(!(actionTaken instanceof Pass)){
             return;
         }
         SF18GameState gs = (SF18GameState) currentState;
         gs.actionsChosen.clear();
+
+        // add game phases to make players discard down to 3
 
         // End player turn
         if (gs.getGameStatus() == CoreConstants.GameResult.GAME_ONGOING) {

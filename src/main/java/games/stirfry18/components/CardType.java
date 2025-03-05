@@ -10,6 +10,8 @@ public enum CardType {
     Mushrooms(2, "3 points with Chicken",3),
     Noodles(1,"needed to stir fry",5);
 
+    // TODO: refactor to include the different scorings in the enum
+
     private final String cardText;
     private final int value;
     private final int quantity;
