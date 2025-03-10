@@ -7,6 +7,7 @@ import core.components.Deck;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.components.CardType;
 import games.stirfry18.components.IngredientCard;
+import games.stirfry18.components.STF18Card;
 
 import java.util.Set;
 
@@ -31,72 +32,23 @@ public class Cook extends AbstractAction {
         SF18GameState gamestate = (SF18GameState) gs;
         Integer points =0;
         for(IngredientCard ingredient : ingredients) {
-            switch(ingredient.getCardType()) {
-                case Shrimp:
-                    if(ingredients.stream().anyMatch(x->x.getCardType() == CardType.Ginger)){
-                        if(ingredients.stream().anyMatch(x->x.getCardType() == CardType.SoySauce)){
-                            points = points + 11;
-                        }
-                        else{
-                            points = points + 9;
-                        }
-                    }
-                    else {
-                        points = points + 6;
-                    }
-                    break;
-                case Pork:
-                    if(ingredients.stream().anyMatch(x->x.getCardType() == CardType.Mushrooms)){
-                        points = points + 8;
-                    }
-                    else {
-                        points = points + 5;
-                    }
-                    break;
-                case Chicken:
-                    if(ingredients.stream().anyMatch(x->x.getCardType() == CardType.GreenOnion)){
-                        if(ingredients.stream().anyMatch(x->x.getCardType() == CardType.Ginger)){
-                            points = points + 7;
-                        }
-                        else{
-                            points = points + 5;
+            if (ingredient.getCardType().getSynergies().length ==0){
+                points += ingredient.getCardType().getBasePoints();
+            }
+            else {
+                int possible = ingredient.getCardType().getBasePoints();
+                for(STF18Card.Synergy synergy : ingredient.getCardType().getSynergies()){
+                    boolean haveSynergy = true;
+                    for(STF18Card condition : synergy.getConditions()){
+                        if(gamestate.getPlayerHands().get(gamestate.getCurrentPlayer()).stream().anyMatch(x-> x.getCardType() != condition)){
+                            haveSynergy=false;
                         }
                     }
-                    else {
-                        points = points + 3;
+                    if(haveSynergy){
+                        possible = Math.max(possible,synergy.getPoints());
                     }
-                    break;
-                case Ginger:
-                    points = points + 2;
-                    break;
-                case GreenOnion:
-                    if(ingredients.stream().anyMatch(x->x.getCardType() == CardType.Shrimp)){
-                        points = points + 5;
-                    }
-                    else {
-                        points = points + 3;
-                    }
-                    break;
-                case SoySauce:
-                    if(ingredients.stream().anyMatch(x->x.getCardType() == CardType.Ginger)) {
-                        points = points + 3;
-                    } else if (ingredients.stream().anyMatch(x->x.getCardType() == CardType.Ginger)) {
-                        points = points + 2;
-                    }
-                    else {
-                        points = points + 1;
-                    }
-                    break;
-                case Mushrooms:
-                    if(ingredients.stream().anyMatch(x->x.getCardType() == CardType.Chicken)){
-                        points = points + 3;
-                    }
-                    else {
-                        points = points + 1;
-                    }
-                    break;
-                case Noodles:
-                    points = points + 1;
+                }
+                points+=possible;
             }
         }
         gamestate.getPlayerScores()[gamestate.getCurrentPlayer()].increment(points);

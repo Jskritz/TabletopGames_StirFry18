@@ -2,18 +2,16 @@ package games.stirfry18.actions;
 
 import core.AbstractGameState;
 import core.actions.AbstractAction;
-import core.components.Component;
 import games.stirfry18.SF18GameState;
-import games.stirfry18.components.CardType;
 import games.stirfry18.components.IngredientCard;
 
 
 public class DiscardProtein extends AbstractAction {
     // Discards one protein card to draw cards equal to its value
 
-    private IngredientCard discardedCard;
+    private Integer discardedCard;
 
-    public DiscardProtein (IngredientCard discardedCard){
+    public DiscardProtein (Integer discardedCard){
         this.discardedCard = discardedCard;
     }
     /**
@@ -25,21 +23,10 @@ public class DiscardProtein extends AbstractAction {
     @Override
     public boolean execute(AbstractGameState gs) {
         SF18GameState gameState = (SF18GameState) gs;
-        gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove(discardedCard);
-        int cardsDraw=0;
-        switch (discardedCard.cardType){
-            case Pork :
-                cardsDraw= 3;
-                break;
-            case Shrimp:
-                cardsDraw= 4;
-                break;
-            case Chicken:
-                cardsDraw= 2;
-                break;
-        }
+        IngredientCard discCard = (IngredientCard) gameState.getComponentById(discardedCard);
+        gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove(discCard);
 
-        for(int i=0; i<cardsDraw; i++){
+        for(int i = 0; i<discCard.getCardType().getDiscardCardDraws(); i++){
             gameState.getPlayerHands().get(gameState.getCurrentPlayer()).add(gameState.getMainDeck().draw());
         }
         return true;

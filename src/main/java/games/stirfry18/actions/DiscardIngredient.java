@@ -12,12 +12,12 @@ import java.util.List;
 public class DiscardIngredient extends AbstractAction {
     // Discards two identical card to draw 3 cards
 
-    private List<IngredientCard> discardedCards;
+    private List<Integer> discardedCards;
 
-    public DiscardIngredient(IngredientCard first, IngredientCard second){
-        discardedCards = new ArrayList<IngredientCard>();
-        discardedCards.add(first);
-        discardedCards.add(second);
+    public DiscardIngredient(Integer firstID, Integer secondID){
+        discardedCards = new ArrayList<Integer>();
+        discardedCards.add(firstID);
+        discardedCards.add(secondID);
     }
     /**
      * Executes this action, applying its effect to the given game state. Can access any component IDs stored
@@ -27,10 +27,9 @@ public class DiscardIngredient extends AbstractAction {
      */
     @Override
     public boolean execute(AbstractGameState gs) {
-        // TODO: Some functionality applied which changes the given game state.
         SF18GameState gameState = (SF18GameState) gs;
-        gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove(discardedCards.get(0));
-        gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove(discardedCards.get(1));
+        gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove((IngredientCard) gameState.getComponentById(discardedCards.get(0)));
+        gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove((IngredientCard) gameState.getComponentById(discardedCards.get(1)));
         for(int i=0; i<3; i++){
             gameState.getPlayerHands().get(gameState.getCurrentPlayer()).add(gameState.getMainDeck().draw());
         }

@@ -15,19 +15,19 @@ import core.components.Card;
  */
 public class IngredientCard extends Card {
 
-    public final CardType cardType;
+    public final STF18Card cardType;
 
-    public IngredientCard(CardType cardType) {
+    public IngredientCard(STF18Card cardType) {
         super(cardType.toString());
         this.cardType = cardType;
     }
 
-    public IngredientCard(CardType cardType, int componentID) {
+    public IngredientCard(STF18Card cardType, int componentID) {
         super(cardType.toString(), componentID);
         this.cardType = cardType;
     }
 
-    public CardType getCardType() {
+    public STF18Card getCardType() {
         return cardType;
     }
 

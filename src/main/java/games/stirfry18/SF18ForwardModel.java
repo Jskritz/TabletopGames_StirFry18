@@ -7,7 +7,7 @@ import core.actions.AbstractAction;
 import core.components.Counter;
 import core.components.Deck;
 import games.stirfry18.actions.*;
-import games.stirfry18.components.CardType;
+import games.stirfry18.components.STF18Card;
 import games.stirfry18.components.IngredientCard;
 
 
@@ -46,7 +46,7 @@ public class SF18ForwardModel extends StandardForwardModel {
         gs.discard = new Deck<>("Discard pile", CoreConstants.VisibilityMode.HIDDEN_TO_ALL);
 
         // add cards to main deck
-        for(CardType type : CardType.values()){
+        for(STF18Card type : STF18Card.values()){
             for(int i=0; i<type.getQuantity(); i++){
                 gs.mainDeck.add(new IngredientCard(type));
             }
@@ -76,9 +76,9 @@ public class SF18ForwardModel extends StandardForwardModel {
 
         for(IngredientCard card:gs.getPlayerHands().get(gs.getCurrentPlayer())){
             switch(card.getCardType()){
-                case Chicken,Shrimp, Pork:
+                case CHICKEN,SHRIMP, PORK:
                     if(!gs.actionsChosen.contains(PossibleActions.DiscardProtein)){
-                        actions.add(new DiscardProtein(card));
+                        actions.add(new DiscardProtein(card.getComponentID()));
                     }
                     break;
                 default:
@@ -87,8 +87,8 @@ public class SF18ForwardModel extends StandardForwardModel {
                             if(other.equals(card)){
                                 continue;
                             }
-                            if(card.cardType == other.getCardType()){
-                                actions.add(new DiscardIngredient(card,other));
+                            if(card.getCardType() == other.getCardType()){
+                                actions.add(new DiscardIngredient(card.getComponentID(),other.getComponentID()));
                             }
                         }
                     }
@@ -98,7 +98,7 @@ public class SF18ForwardModel extends StandardForwardModel {
 
         //TODO: Check if this madness work @>@
         if(!gs.actionsChosen.contains(PossibleActions.Cook)){
-            if(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().anyMatch(x -> x.getCardType() == CardType.Noodles)){ // need noodles to cook
+            if(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().anyMatch(x -> x.getCardType() == STF18Card.NOODLES)){ // need noodles to cook
                 Set<IngredientCard> filteredHand = new HashSet<>(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().toList()); //cannot use replicated cards
                 if(filteredHand.size()>=3){ // need at least 3 cards
                     if(filteredHand.size()<=5){ // can use a maximum of 5 cards
@@ -107,7 +107,7 @@ public class SF18ForwardModel extends StandardForwardModel {
                     else{// with more than 5 we need to select 5
                         Set<Set<IngredientCard>> possibleRecipies = getIngretientsSubsets(filteredHand);
                         for(Set<IngredientCard> possible:possibleRecipies){
-                            if(possible.size()==5 && possible.stream().anyMatch(x->x.getCardType()==CardType.Noodles)){
+                            if(possible.size()==5 && possible.stream().anyMatch(x->x.getCardType()==STF18Card.NOODLES)){
                                 actions.add(new Cook(possible));
                             }
                         }
