@@ -172,7 +172,7 @@ public enum GameType {
             Arrays.asList(ActionPoints, Cooperative, HandManagement, PointToPointMovement, SetCollection, Trading, VariablePlayerPowers),
             PandemicGameState.class, PandemicForwardModel.class, PandemicParameters.class, PandemicGUIManager.class,
             "data/pandemic/"),
-    StirFry18(2, 4,
+    StirFry18(2, 5,
             Arrays.asList(Strategy, Food),
             Arrays.asList(ActionPoints, HandManagement),
             SF18GameState.class, SF18ForwardModel.class, SF18Parameters.class, SF18GUIManager.class,
