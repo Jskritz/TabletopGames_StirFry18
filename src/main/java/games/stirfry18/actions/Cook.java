@@ -2,10 +2,7 @@ package games.stirfry18.actions;
 
 import core.AbstractGameState;
 import core.actions.AbstractAction;
-import core.components.Component;
-import core.components.Deck;
 import games.stirfry18.SF18GameState;
-import games.stirfry18.components.CardType;
 import games.stirfry18.components.IngredientCard;
 import games.stirfry18.components.STF18Card;
 

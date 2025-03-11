@@ -15,6 +15,9 @@ import evaluation.optimisation.TunableParameters;
  * automatic game parameter optimisation tools in the framework.</p>
  */
 public class SF18Parameters extends AbstractParameters {
+    public String dataPath = "data/stirfry18/";
+
+    public String getDataPath() { return dataPath; }
 
     @Override
     protected AbstractParameters _copy() {

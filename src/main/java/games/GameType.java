@@ -93,6 +93,10 @@ import games.saboteur.SaboteurForwardModel;
 import games.saboteur.SaboteurGameParameters;
 import games.saboteur.SaboteurGameState;
 import games.saboteur.gui.SaboteurGUIManager;
+import games.stirfry18.SF18ForwardModel;
+import games.stirfry18.SF18GameState;
+import games.stirfry18.SF18Parameters;
+import games.stirfry18.gui.SF18GUIManager;
 import games.stratego.StrategoForwardModel;
 import games.stratego.StrategoGameState;
 import games.stratego.StrategoParams;
@@ -168,6 +172,11 @@ public enum GameType {
             Arrays.asList(ActionPoints, Cooperative, HandManagement, PointToPointMovement, SetCollection, Trading, VariablePlayerPowers),
             PandemicGameState.class, PandemicForwardModel.class, PandemicParameters.class, PandemicGUIManager.class,
             "data/pandemic/"),
+    StirFry18(2, 4,
+            Arrays.asList(Strategy, Food),
+            Arrays.asList(ActionPoints, HandManagement),
+            SF18GameState.class, SF18ForwardModel.class, SF18Parameters.class, SF18GUIManager.class,
+            "data/stirfry18/"),
     TicTacToe(2, 2,
             Arrays.asList(Simple, Abstract),
             Collections.singletonList(PatternBuilding),
@@ -573,7 +582,7 @@ public enum GameType {
         Economic,
         Environmental,
         Manufacturing,
-        Wargame, Civilization, Ancient, CodeBreaking;
+        Wargame, Civilization, Ancient, CodeBreaking,Food;
 
         /**
          * @return a list of all games within this category.
