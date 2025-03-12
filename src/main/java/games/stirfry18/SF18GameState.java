@@ -43,7 +43,7 @@ public class SF18GameState extends AbstractGameState {
     @Override
     protected GameType _getGameType() {
         // TODO: replace with game-specific enum value declared in GameType
-        return GameType.GameTemplate;
+        return GameType.StirFry18;
     }
 
     public List<Deck<IngredientCard>> getPlayerHands() {
@@ -66,8 +66,13 @@ public class SF18GameState extends AbstractGameState {
      */
     @Override
     protected List<Component> _getAllComponents() {
+        List<Component> components = new ArrayList<>();
+        for (int i =0; i<playerHands.size();i++)
+            components.add(playerHands.get(i));
+        components.add(mainDeck);
+        components.add(discard);
         // TODO: add all components to the list
-        return new ArrayList<>();
+        return components;
     }
 
     /**

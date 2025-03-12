@@ -3,6 +3,9 @@ package games.stirfry18;
 import core.AbstractGameState;
 import core.AbstractParameters;
 import evaluation.optimisation.TunableParameters;
+import games.sushigo.SGParameters;
+
+import java.util.Objects;
 
 /**
  * <p>This class should hold a series of variables representing game parameters (e.g. number of cards dealt to players,
@@ -21,19 +24,27 @@ public class SF18Parameters extends AbstractParameters {
 
     @Override
     protected AbstractParameters _copy() {
+        SF18Parameters param = new SF18Parameters();
+        param.dataPath = this.dataPath;
         // TODO: deep copy of all variables.
-        return this;
+        return param;
     }
 
     @Override
     protected boolean _equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SF18Parameters)) return false;
+        if (!super.equals(o)) return false;
+        SF18Parameters that = (SF18Parameters) o;
+        return this.dataPath == that.dataPath;
+
         // TODO: compare all variables.
-        return o instanceof SF18Parameters;
+
     }
 
     @Override
     public int hashCode() {
         // TODO: include the hashcode of all variables.
-        return super.hashCode();
+        return Objects.hash(super.hashCode(),dataPath);
     }
 }
