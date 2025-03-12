@@ -95,6 +95,20 @@ public class SF18GameState extends AbstractGameState {
     @Override
     protected SF18GameState _copy(int playerId) {
         SF18GameState copy = new SF18GameState(gameParameters, getNPlayers());
+        copy.playerScores = new Counter[nPlayers];
+        for (int i =0 ; i<nPlayers;i++){
+            copy.playerScores[i] = playerScores[i].copy();
+        }
+        copy.playerHands = new ArrayList<>();
+        for(Deck<IngredientCard> d : playerHands){
+            copy.playerHands.add(d.copy());
+        }
+        copy.discard = discard.copy();
+        copy.mainDeck = mainDeck.copy();
+        copy.actionsChosen = new ArrayList<>();
+        for (PossibleActions a : actionsChosen){
+            copy.actionsChosen.add(a);
+        }
         // TODO: deep copy all variables to the new game state.
         return copy;
     }
