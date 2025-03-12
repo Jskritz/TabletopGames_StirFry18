@@ -9,6 +9,7 @@ import core.components.PartialObservableDeck;
 import games.GameType;
 import games.stirfry18.actions.PossibleActions;
 import games.stirfry18.components.IngredientCard;
+import games.sushigo.SGGameState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,8 +142,13 @@ public class SF18GameState extends AbstractGameState {
 
     @Override
     protected boolean _equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SF18GameState)) return false;
+        if (!super.equals(o)) return false;
+        SF18GameState that = (SF18GameState) o;
+        return playerHands == that.playerHands && playerScores == that.playerScores &&
+                mainDeck == that.mainDeck && discard == that.discard && actionsChosen == that.actionsChosen;
         // TODO: compare all variables in the state
-        return o instanceof SF18GameState;
     }
 
     @Override
