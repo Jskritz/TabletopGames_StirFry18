@@ -4,6 +4,7 @@ import core.AbstractGameState;
 import core.actions.AbstractAction;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.components.IngredientCard;
+import games.sushigo.SGGameState;
 
 
 public class DiscardProtein extends AbstractAction {
@@ -59,7 +60,13 @@ public class DiscardProtein extends AbstractAction {
     @Override
     public String toString() {
         // TODO: Replace with appropriate string, including any action parameters
-        return "My action name";
+        String action = "Discard Protein: " + discardedCard.toString();
+
+        return action ;
+    }
+
+    IngredientCard getCard(AbstractGameState gameState){
+        return (IngredientCard) gameState.getComponentById(discardedCard);
     }
 
     /**
@@ -70,7 +77,10 @@ public class DiscardProtein extends AbstractAction {
      */
     @Override
     public String getString(AbstractGameState gameState) {
-        return toString();
+        String action = "Discard: ";
+        action += getCard(gameState).cardType.toString();
+
+        return action;
     }
 
 

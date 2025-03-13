@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class Cook extends AbstractAction {
     // cook and score. uses 3 to 5 ingredients and need at least 1 noodle, cannot use more than one of the same ingredient
-
+    // TODO: remove object refrence and USE IDS
     Set<IngredientCard> ingredients;
 
     public Cook(Set<IngredientCard> ingredients) {
@@ -80,7 +80,11 @@ public class Cook extends AbstractAction {
     @Override
     public String toString() {
         // TODO: Replace with appropriate string, including any action parameters
-        return "My action name";
+        String action = "Cook with: ";
+        for (IngredientCard card:ingredients){
+            action+= card.cardType.toString() + ",";
+        }
+        return action ;
     }
 
     /**

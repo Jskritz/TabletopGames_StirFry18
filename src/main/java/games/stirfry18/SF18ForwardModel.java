@@ -38,7 +38,8 @@ public class SF18ForwardModel extends StandardForwardModel {
     @Override
     protected void _setup(AbstractGameState firstState) {
         SF18GameState gs = (SF18GameState) firstState;
-        gs.playerScores = new Counter[firstState.getNPlayers()];
+        gs.playerScores = new Counter[gs.getNPlayers()];
+
         gs.actionsChosen = new ArrayList<>();
 
         // Setup draw & discard piles
@@ -55,11 +56,12 @@ public class SF18ForwardModel extends StandardForwardModel {
 
         // deal player hands
         gs.playerHands = new ArrayList<>();
-        for( int i=0; i< firstState.getNPlayers();i++){
+        for( int i=0; i< gs.getNPlayers();i++){
             gs.playerHands.add(new Deck<IngredientCard>("Player " + i + " hand", CoreConstants.VisibilityMode.VISIBLE_TO_OWNER));
             for( int j=0; j<3; j++){
                 gs.playerHands.get(i).add(gs.mainDeck.draw());
             }
+            gs.playerScores[i] = new Counter(0, 0, Integer.MAX_VALUE, "Player " + i + " score");
         }
         // Set starting player
         gs.setFirstPlayer(0);

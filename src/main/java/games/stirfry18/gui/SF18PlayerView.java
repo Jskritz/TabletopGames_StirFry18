@@ -1,6 +1,7 @@
 package games.stirfry18.gui;
 
 import core.components.Deck;
+import games.stirfry18.components.IngredientCard;
 import games.sushigo.SGGameState;
 import games.sushigo.cards.SGCard;
 import games.sushigo.gui.SGDeckView;
@@ -18,8 +19,8 @@ public class SF18PlayerView extends JComponent {
     // ID of player showing
     int playerId;
     // Number of points player has
-    SGDeckView playerHandView;
-    SGDeckView playedCardsView;
+    SF18DeckView playerHandView;
+    SF18DeckView playedCardsView;
     JLabel pointsText;
 
     // Border offsets
@@ -29,13 +30,12 @@ public class SF18PlayerView extends JComponent {
 
     SGGameState gs;
 
-    public SF18PlayerView(Deck<SGCard> deck, Deck<SGCard> playDeck, int playerId, Set<Integer> humanId, String dataPath)
+    public SF18PlayerView(Deck<IngredientCard> deck, int playerId, Set<Integer> humanId, String dataPath)
     {
 //        this.width = playerAreaWidth + border*20;
 //        this.height = playerAreaHeight + border + borderBottom;
         this.playerId = playerId;
-        this.playerHandView = new SGDeckView(playerId, deck, true, dataPath, new Rectangle(border, border, playerAreaWidth-50, playerAreaHeight));
-        this.playedCardsView = new SGDeckView(playerId, playDeck, true, dataPath, new Rectangle(border, border, playerAreaWidth-50, playerAreaHeight));
+        this.playerHandView = new SF18DeckView(playerId, deck, true, dataPath, new Rectangle(border, border, playerAreaWidth-50, playerAreaHeight));
         this.pointsText = new JLabel(0 + " points");
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -49,11 +49,9 @@ public class SF18PlayerView extends JComponent {
         wrapperPlayed.setLayout(new BoxLayout(wrapperPlayed, BoxLayout.X_AXIS));
         JLabel playedLabel = new JLabel(new ImageIcon(dataPath + "play.png"));
         wrapperPlayed.add(playedLabel);
-        wrapperPlayed.add(playedCardsView);
         wrapperPlayed.setOpaque(false);
 
         playerHandView.setOpaque(false);
-        playedCardsView.setOpaque(false);
         pointsText.setOpaque(false);
 
         add(wrapperHand);

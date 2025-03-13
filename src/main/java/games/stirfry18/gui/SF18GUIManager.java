@@ -3,6 +3,8 @@ package games.stirfry18.gui;
 import core.AbstractGameState;
 import core.AbstractPlayer;
 import core.Game;
+import games.stirfry18.SF18GameState;
+import games.stirfry18.SF18Parameters;
 import games.sushigo.SGGameState;
 import games.sushigo.SGParameters;
 import games.sushigo.gui.SGPlayerView;
@@ -39,7 +41,7 @@ public class SF18GUIManager extends AbstractGUIManager {
     final static int SGCardWidth = 60;
     final static int SGCardHeight = 85;
     // List of player hand views
-    SGPlayerView[] playerHands;
+    SF18PlayerView[] playerHands;
     // Currently active player
     int activePlayer = -1;
     // Border highlight of active player
@@ -71,11 +73,11 @@ public class SF18GUIManager extends AbstractGUIManager {
                     this.height += defaultActionPanelHeight;
                 }
 
-                SGGameState parsedGameState = (SGGameState) gameState;
-                SGParameters parameters = (SGParameters) gameState.getGameParameters();
+                SF18GameState parsedGameState = (SF18GameState) gameState;
+                SF18Parameters parameters = (SF18Parameters) gameState.getGameParameters();
 
                 // Create main game area that will hold all game views
-                playerHands = new SGPlayerView[nPlayers];
+                playerHands = new SF18PlayerView[nPlayers];
                 playerViewBorders = new Border[nPlayers];
                 playerViewWinBorders = new Border[nPlayers];
                 playerViewLoseBorders = new Border[nPlayers];
@@ -86,7 +88,7 @@ public class SF18GUIManager extends AbstractGUIManager {
 
                 // Player hands go on the edges
                 for (int i = 0; i < nPlayers; i++) {
-                    SGPlayerView playerHand = new SGPlayerView(parsedGameState.getPlayerHands().get(i), parsedGameState.getPlayedCards().get(i), i, human, parameters.getDataPath());
+                    SF18PlayerView playerHand = new SF18PlayerView(parsedGameState.getPlayerHands().get(i), i, human, parameters.getDataPath());
                     playerHand.setOpaque(false);
                     playerHand.setPreferredSize(new Dimension(playerAreaWidth, playerAreaHeight));
 

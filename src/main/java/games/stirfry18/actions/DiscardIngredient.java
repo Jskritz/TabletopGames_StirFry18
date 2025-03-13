@@ -5,6 +5,7 @@ import core.actions.AbstractAction;
 import core.components.Component;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.components.IngredientCard;
+import scala.Int;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,13 @@ public class DiscardIngredient extends AbstractAction {
 
     private List<Integer> discardedCards;
 
+
     public DiscardIngredient(Integer firstID, Integer secondID){
         discardedCards = new ArrayList<Integer>();
         discardedCards.add(firstID);
+
         discardedCards.add(secondID);
+
     }
     /**
      * Executes this action, applying its effect to the given game state. Can access any component IDs stored
@@ -62,8 +66,15 @@ public class DiscardIngredient extends AbstractAction {
 
     @Override
     public String toString() {
-        // TODO: Replace with appropriate string, including any action parameters
-        return "My action name";
+        String action = "Discard Ingretients: ";
+        action += discardedCards.get(0).toString() + " and ";
+        action += discardedCards.get(1).toString();
+
+        return action ;
+    }
+
+    IngredientCard getCard(AbstractGameState gameState, Integer index){
+        return (IngredientCard) gameState.getComponentById(discardedCards.get(index));
     }
 
     /**
@@ -74,7 +85,11 @@ public class DiscardIngredient extends AbstractAction {
      */
     @Override
     public String getString(AbstractGameState gameState) {
-        return toString();
+        String action = "Discard: ";
+        action += getCard(gameState,0).cardType.toString() + "and ";
+        action += getCard(gameState,1).cardType.toString();
+
+        return action;
     }
 
 
