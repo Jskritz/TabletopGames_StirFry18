@@ -24,11 +24,16 @@ public class DiscardProtein extends AbstractAction {
     @Override
     public boolean execute(AbstractGameState gs) {
         SF18GameState gameState = (SF18GameState) gs;
+        gameState.getActionsChosen().add(PossibleActions.DiscardProtein);
         IngredientCard discCard = (IngredientCard) gameState.getComponentById(discardedCard);
         gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove(discCard);
 
         for(int i = 0; i<discCard.getCardType().getDiscardCardDraws(); i++){
-            gameState.getPlayerHands().get(gameState.getCurrentPlayer()).add(gameState.getMainDeck().draw());
+            IngredientCard draw = gameState.getMainDeck().draw();
+            if (draw==null){
+                return true;
+            }
+            gameState.getPlayerHands().get(gameState.getCurrentPlayer()).add(draw);
         }
         return true;
     }

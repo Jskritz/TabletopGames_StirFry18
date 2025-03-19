@@ -62,6 +62,7 @@ public class SF18GameState extends AbstractGameState {
     public Counter[] getPlayerScores() {
         return playerScores;
     }
+    public List<PossibleActions> getActionsChosen(){return  actionsChosen;}
 
     /**
      * Returns all Components used in the game and referred to by componentId from actions or rules.

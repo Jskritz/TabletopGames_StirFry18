@@ -1,6 +1,7 @@
 package games.stirfry18.gui;
 
 import core.components.Deck;
+import games.stirfry18.SF18GameState;
 import games.stirfry18.components.IngredientCard;
 import games.sushigo.SGGameState;
 import games.sushigo.cards.SGCard;
@@ -28,7 +29,7 @@ public class SF18PlayerView extends JComponent {
     int borderBottom = 20;
     int width, height;
 
-    SGGameState gs;
+    SF18GameState gs;
 
     public SF18PlayerView(Deck<IngredientCard> deck, int playerId, Set<Integer> humanId, String dataPath)
     {
@@ -65,11 +66,11 @@ public class SF18PlayerView extends JComponent {
 //        return new Dimension(width, height);
 //    }
 
-    public void update(SGGameState gameState)
+    public void update(SF18GameState gameState)
     {
         gs = gameState;
         playerHandView.updateComponent(gameState.getPlayerHands().get(playerId));
-        playedCardsView.updateComponent(gameState.getPlayedCards().get(playerId));
-        this.pointsText.setText(gameState.getPlayerScore()[playerId].getValue() + " points");
+        //playedCardsView.updateComponent(gameState.getPlayedCards().get(playerId));
+        this.pointsText.setText(gameState.getPlayerScores()[playerId].getValue() + " points");
     }
 }

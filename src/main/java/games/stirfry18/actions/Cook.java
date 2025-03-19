@@ -27,6 +27,7 @@ public class Cook extends AbstractAction {
     public boolean execute(AbstractGameState gs) {
         // TODO: Some functionality applied which changes the given game state.
         SF18GameState gamestate = (SF18GameState) gs;
+        gamestate.getActionsChosen().add(PossibleActions.Cook);
         Integer points =0;
         for(Integer index : ingredients) {
             IngredientCard ingredient = (IngredientCard) gamestate.getComponentById(index);

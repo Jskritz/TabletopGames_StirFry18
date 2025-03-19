@@ -4,6 +4,7 @@ import core.AbstractGameState;
 import core.CoreConstants;
 import core.StandardForwardModel;
 import core.actions.AbstractAction;
+import core.actions.DoNothing;
 import core.components.Counter;
 import core.components.Deck;
 import games.stirfry18.actions.*;
@@ -11,6 +12,7 @@ import games.stirfry18.components.STF18Card;
 import games.stirfry18.components.IngredientCard;
 
 
+import java.io.Console;
 import java.util.*;
 
 /**
@@ -100,7 +102,7 @@ public class SF18ForwardModel extends StandardForwardModel {
                 }
             }
 
-            //TODO: Check if this madness work @>@
+            //TODO: Check if this madness work @>@ creates options, still need to see if it correctly creates all options
             if(!gs.actionsChosen.contains(PossibleActions.Cook)){
                 if(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().anyMatch(x -> x.getCardType() == STF18Card.NOODLES)){ // need noodles to cook
                     Set<IngredientCard> filteredHand = new HashSet<>(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().toList()); //cannot use replicated cards
@@ -165,7 +167,8 @@ public class SF18ForwardModel extends StandardForwardModel {
     @Override
     protected void _afterAction(AbstractGameState currentState, AbstractAction actionTaken) {
         //super._afterAction(currentState, actionTaken);
-        if(!(actionTaken instanceof Pass)){
+        if(!(actionTaken instanceof DoNothing)){
+
             return;
         }
         SF18GameState gs = (SF18GameState) currentState;
@@ -174,6 +177,7 @@ public class SF18ForwardModel extends StandardForwardModel {
         // add game phases to make players discard down to 3
         if(gs.getGamePhase()==SF18GameState.SF18GamePhases.ActionPhase){
             gs.setGamePhase(SF18GameState.SF18GamePhases.DiscardPhase);
+            return;
         }
 
         // End player turn

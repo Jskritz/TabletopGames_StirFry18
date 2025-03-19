@@ -5,8 +5,8 @@ public enum STF18Card {
     PORK("Pork", 5, 3, 1),
     CHICKEN("Chicken", 3, 2, 1),
     GINGER("Ginger", 2, 0, 2),
-    GREEN_ONION("Green Onion", 3, 0, 2),
-    SOY_SAUCE("Soy Sauce", 1, 0, 3),
+    GREEN_ONION("GreenOnion", 3, 0, 2),
+    SOY_SAUCE("SoySauce", 1, 0, 3),
     MUSHROOMS("Mushrooms", 2, 0, 3),
     NOODLES("Noodles", 1, 0, 5);
 
