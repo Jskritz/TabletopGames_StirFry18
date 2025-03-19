@@ -11,10 +11,10 @@ import java.util.Set;
 
 public class Cook extends AbstractAction {
     // cook and score. uses 3 to 5 ingredients and need at least 1 noodle, cannot use more than one of the same ingredient
-    // TODO: remove object refrence and USE IDS
-    Set<IngredientCard> ingredients;
 
-    public Cook(Set<IngredientCard> ingredients) {
+    Set<Integer> ingredients;
+
+    public Cook(Set<Integer> ingredients) {
         this.ingredients = ingredients;
     }
     /**
@@ -28,7 +28,8 @@ public class Cook extends AbstractAction {
         // TODO: Some functionality applied which changes the given game state.
         SF18GameState gamestate = (SF18GameState) gs;
         Integer points =0;
-        for(IngredientCard ingredient : ingredients) {
+        for(Integer index : ingredients) {
+            IngredientCard ingredient = (IngredientCard) gamestate.getComponentById(index);
             if (ingredient.getCardType().getSynergies().length ==0){
                 points += ingredient.getCardType().getBasePoints();
             }
@@ -47,6 +48,7 @@ public class Cook extends AbstractAction {
                 }
                 points+=possible;
             }
+            gamestate.getPlayerHands().get(gamestate.getCurrentPlayer()).remove(ingredient);
         }
         gamestate.getPlayerScores()[gamestate.getCurrentPlayer()].increment(points);
 
@@ -79,12 +81,12 @@ public class Cook extends AbstractAction {
 
     @Override
     public String toString() {
-        // TODO: Replace with appropriate string, including any action parameters
-        String action = "Cook with: ";
-        for (IngredientCard card:ingredients){
-            action+= card.cardType.toString() + ",";
+
+        String action = "Cook with ids: ";
+        for(Integer index : ingredients){
+            action+= index.toString() + ", ";
         }
-        return action ;
+        return action;
     }
 
     /**
@@ -95,7 +97,13 @@ public class Cook extends AbstractAction {
      */
     @Override
     public String getString(AbstractGameState gameState) {
-        return toString();
+        SF18GameState gs = (SF18GameState) gameState;
+        String action = "Cook with: ";
+        for (Integer index:ingredients){
+            IngredientCard card = (IngredientCard) gs.getComponentById(index);
+            action+= card.cardType.toString() + ",";
+        }
+        return action ;
     }
 
 

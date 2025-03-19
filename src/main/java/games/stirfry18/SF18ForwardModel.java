@@ -65,6 +65,8 @@ public class SF18ForwardModel extends StandardForwardModel {
         }
         // Set starting player
         gs.setFirstPlayer(0);
+        // Start with ACtion Phase
+        gs.setGamePhase(SF18GameState.SF18GamePhases.ActionPhase);
     }
 
     /**
@@ -75,51 +77,69 @@ public class SF18ForwardModel extends StandardForwardModel {
     protected List<AbstractAction> _computeAvailableActions(AbstractGameState gameState) {
         SF18GameState gs = (SF18GameState) gameState;
         List<AbstractAction> actions = new ArrayList<>();
-
-        for(IngredientCard card:gs.getPlayerHands().get(gs.getCurrentPlayer())){
-            switch(card.getCardType()){
-                case CHICKEN,SHRIMP, PORK:
-                    if(!gs.actionsChosen.contains(PossibleActions.DiscardProtein)){
-                        actions.add(new DiscardProtein(card.getComponentID()));
-                    }
-                    break;
-                default:
-                    if(!gs.actionsChosen.contains(PossibleActions.DiscardIngredients)){
-                        for(IngredientCard other:gs.getPlayerHands().get(gs.getCurrentPlayer())){
-                            if(other.equals(card)){
-                                continue;
-                            }
-                            if(card.getCardType() == other.getCardType()){
-                                actions.add(new DiscardIngredient(card.getComponentID(),other.getComponentID()));
+        if(gs.getGamePhase()==SF18GameState.SF18GamePhases.ActionPhase){
+            for(IngredientCard card:gs.getPlayerHands().get(gs.getCurrentPlayer())){
+                switch(card.getCardType()){
+                    case CHICKEN,SHRIMP, PORK:
+                        if(!gs.actionsChosen.contains(PossibleActions.DiscardProtein)){
+                            actions.add(new DiscardProtein(card.getComponentID()));
+                        }
+                        break;
+                    default:
+                        if(!gs.actionsChosen.contains(PossibleActions.DiscardIngredients)){
+                            for(IngredientCard other:gs.getPlayerHands().get(gs.getCurrentPlayer())){
+                                if(other.equals(card)){
+                                    continue;
+                                }
+                                if(card.getCardType() == other.getCardType()){
+                                    actions.add(new DiscardIngredient(card.getComponentID(),other.getComponentID()));
+                                }
                             }
                         }
-                    }
 
+                }
             }
-        }
 
-        //TODO: Check if this madness work @>@
-        if(!gs.actionsChosen.contains(PossibleActions.Cook)){
-            if(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().anyMatch(x -> x.getCardType() == STF18Card.NOODLES)){ // need noodles to cook
-                Set<IngredientCard> filteredHand = new HashSet<>(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().toList()); //cannot use replicated cards
-                if(filteredHand.size()>=3){ // need at least 3 cards
-                    if(filteredHand.size()<=5){ // can use a maximum of 5 cards
-                        actions.add(new Cook(filteredHand));
-                    }
-                    else{// with more than 5 we need to select 5
-                        Set<Set<IngredientCard>> possibleRecipies = getIngretientsSubsets(filteredHand);
-                        for(Set<IngredientCard> possible:possibleRecipies){
-                            if(possible.size()==5 && possible.stream().anyMatch(x->x.getCardType()==STF18Card.NOODLES)){
-                                actions.add(new Cook(possible));
+            //TODO: Check if this madness work @>@
+            if(!gs.actionsChosen.contains(PossibleActions.Cook)){
+                if(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().anyMatch(x -> x.getCardType() == STF18Card.NOODLES)){ // need noodles to cook
+                    Set<IngredientCard> filteredHand = new HashSet<>(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().toList()); //cannot use replicated cards
+                    if(filteredHand.size()>=3){ // need at least 3 cards
+                        if(filteredHand.size()<=5){ // can use a maximum of 5 cards
+                            Set<Integer> cardIDs = new HashSet<>();
+                            for (IngredientCard card: filteredHand){
+                                cardIDs.add(card.getComponentID());
+                            }
+                            actions.add(new Cook(cardIDs));
+
+                        }
+                        else{// with more than 5 we need to select 5
+                            Set<Set<IngredientCard>> possibleRecipies = getIngretientsSubsets(filteredHand);
+                            for(Set<IngredientCard> possible:possibleRecipies){
+                                if(possible.size()==5 && possible.stream().anyMatch(x->x.getCardType()==STF18Card.NOODLES)){
+                                    Set<Integer> cardIDs = new HashSet<>();
+                                    for (IngredientCard card: possible){
+                                        cardIDs.add(card.getComponentID());
+                                    }
+                                    actions.add(new Cook(cardIDs));
+                                }
                             }
                         }
                     }
                 }
             }
+            actions.add(new Pass());
+
+        } else if (gs.getGamePhase()==SF18GameState.SF18GamePhases.DiscardPhase) {
+            if(gs.getPlayerHands().get(gameState.getCurrentPlayer()).getSize()>3){
+                for(IngredientCard card:gs.getPlayerHands().get(gs.getCurrentPlayer())){
+                    actions.add(new Discard(card.getComponentID()));
+                }
+            }
+            else {
+                actions.add(new Pass());
+            }
         }
-
-
-        actions.add(new Pass());
         return actions;
     }
 
@@ -152,9 +172,13 @@ public class SF18ForwardModel extends StandardForwardModel {
         gs.actionsChosen.clear();
 
         // add game phases to make players discard down to 3
+        if(gs.getGamePhase()==SF18GameState.SF18GamePhases.ActionPhase){
+            gs.setGamePhase(SF18GameState.SF18GamePhases.DiscardPhase);
+        }
 
         // End player turn
         if (gs.getGameStatus() == CoreConstants.GameResult.GAME_ONGOING) {
+            gs.setGamePhase(SF18GameState.SF18GamePhases.ActionPhase);
             endPlayerTurn(gs, gs.getCurrentPlayer()+1% gs.getNPlayers());
         }
 
