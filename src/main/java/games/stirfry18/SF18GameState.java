@@ -6,6 +6,7 @@ import core.components.Component;
 import core.components.Counter;
 import core.components.Deck;
 import core.components.PartialObservableDeck;
+import core.interfaces.IGamePhase;
 import games.GameType;
 import games.stirfry18.actions.PossibleActions;
 import games.stirfry18.components.IngredientCard;
@@ -30,6 +31,9 @@ public class SF18GameState extends AbstractGameState {
     Counter[] playerScores;
     List<PossibleActions> actionsChosen;
 
+    public enum SF18GamePhases implements IGamePhase{
+        ActionPhase, DiscardPhase
+    }
     /**
      * @param gameParameters - game parameters.
      * @param nPlayers       - number of players in the game
