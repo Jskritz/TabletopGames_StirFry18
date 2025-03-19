@@ -64,6 +64,10 @@ public class SF18GameState extends AbstractGameState {
     }
     public List<PossibleActions> getActionsChosen(){return  actionsChosen;}
 
+    public void addPlayerScore(Integer playerID, Integer ammount){
+        playerScores[playerID].increment(ammount);
+    }
+
     /**
      * Returns all Components used in the game and referred to by componentId from actions or rules.
      * This method is called after initialising the game state, so all components will be initialised already.
