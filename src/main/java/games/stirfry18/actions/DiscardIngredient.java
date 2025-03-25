@@ -5,7 +5,7 @@ import core.actions.AbstractAction;
 import core.components.Component;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.components.IngredientCard;
-import scala.Int;
+
 
 import java.util.ArrayList;
 import java.util.List;

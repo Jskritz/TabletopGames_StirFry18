@@ -71,6 +71,6 @@ public class SF18PlayerView extends JComponent {
         gs = gameState;
         playerHandView.updateComponent(gameState.getPlayerHands().get(playerId));
         //playedCardsView.updateComponent(gameState.getPlayedCards().get(playerId));
-        this.pointsText.setText(gameState.getPlayerScores()[playerId].getValue() + " points");
+        this.pointsText.setText(gameState.getGameScore(playerId) + " points");
     }
 }
