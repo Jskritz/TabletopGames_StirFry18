@@ -44,13 +44,12 @@ public class IngredientCard extends Card {
 
     @Override
     public boolean equals(Object o) {
-        // TODO: compare all class variables (if any).
-        return (o instanceof IngredientCard) && super.equals(o);
+
+        return (o instanceof IngredientCard) && super.equals(o) && ((IngredientCard) o).cardType.equals(cardType);
     }
 
     @Override
     public int hashCode() {
-        // TODO: include all class variables (if any).
-        return super.hashCode();
+        return super.hashCode() + cardType.hashCode();
     }
 }
