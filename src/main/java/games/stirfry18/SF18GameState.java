@@ -13,7 +13,9 @@ import games.stirfry18.components.IngredientCard;
 import games.sushigo.SGGameState;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>The game state encapsulates all game information. It is a data-only class, with game functionality present
@@ -77,11 +79,12 @@ public class SF18GameState extends AbstractGameState {
     @Override
     protected List<Component> _getAllComponents() {
         List<Component> components = new ArrayList<>();
-        for (int i =0; i<playerHands.size();i++)
+        for (int i =0; i<playerHands.size();i++) {
             components.add(playerHands.get(i));
+            components.add(playerScores[i]);
+        }
         components.add(mainDeck);
         components.add(discard);
-        // TODO: add all components to the list
         return components;
     }
 
@@ -116,10 +119,8 @@ public class SF18GameState extends AbstractGameState {
         copy.discard = discard.copy();
         copy.mainDeck = mainDeck.copy();
         copy.actionsChosen = new ArrayList<>();
-        for (PossibleActions a : actionsChosen){
-            copy.actionsChosen.add(a);
-        }
-        // TODO: deep copy all variables to the new game state.
+        copy.actionsChosen.addAll(actionsChosen);
+
         return copy;
     }
 
@@ -158,13 +159,13 @@ public class SF18GameState extends AbstractGameState {
         SF18GameState that = (SF18GameState) o;
         return playerHands == that.playerHands && playerScores == that.playerScores &&
                 mainDeck == that.mainDeck && discard == that.discard && actionsChosen == that.actionsChosen;
-        // TODO: compare all variables in the state
     }
 
     @Override
     public int hashCode() {
-        // TODO: include the hash code of all variables
-        return super.hashCode();
+        int result = Objects.hash(playerHands,mainDeck,discard,playerHands,actionsChosen);
+        result = 76*result* Arrays.hashCode(playerScores);
+        return result;
     }
 
     // TODO: Consider the methods below for possible implementation
