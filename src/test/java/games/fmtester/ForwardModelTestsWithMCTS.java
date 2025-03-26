@@ -7,6 +7,11 @@ import org.junit.Test;
 public class ForwardModelTestsWithMCTS {
 
     @Test
+    public void testStirFry18() {
+        new ForwardModelTester("game=StirFry18", "nGames=1", "nPlayers=3", "agent=json\\players\\gameSpecific\\Saboteur.json");
+    }
+
+    @Test
     public void testSaboteur() {
         new ForwardModelTester("game=Saboteur", "nGames=1", "nPlayers=3", "agent=json\\players\\gameSpecific\\Saboteur.json");
     }

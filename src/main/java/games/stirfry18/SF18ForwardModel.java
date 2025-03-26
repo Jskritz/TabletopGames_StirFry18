@@ -42,6 +42,8 @@ public class SF18ForwardModel extends StandardForwardModel {
     protected void _setup(AbstractGameState firstState) {
         SF18GameState gs = (SF18GameState) firstState;
         gs.playerScores = new Counter[gs.getNPlayers()];
+        gs.getGameParameters().setMaxRounds(500); //parameter
+
 
         gs.actionsChosen = new ArrayList<>();
 
@@ -186,8 +188,17 @@ public class SF18ForwardModel extends StandardForwardModel {
         // End player turn
         if (gs.getGameStatus() == CoreConstants.GameResult.GAME_ONGOING) {
             gs.setGamePhase(SF18GameState.SF18GamePhases.ActionPhase);
+            gs.mainDeck.add(gs.discard);
+            gs.mainDeck.shuffle(new Random(gs.getGameParameters().getRandomSeed()));
+            gs.discard.clear();
+            gs.getPlayerHands().get((gs.getCurrentPlayer()+1)% gs.getNPlayers()).add(gs.mainDeck.draw());
             endPlayerTurn(gs, (gs.getCurrentPlayer()+1)% gs.getNPlayers());
         }
-
+        // TODO: end the game BRUH
+        for (int i =0 ; i<gs.getNPlayers();i++){
+            if(gs.getGameScore(i)>=30){
+                endGame(gs);
+            }
+        }
     }
 }

@@ -22,11 +22,20 @@ public class Pass extends DoNothing {
     }
 
 
+    @Override
+    public int hashCode() {
+        return 100092030;
+    }
 
     @Override
     public boolean equals(Object obj) {
         // TODO: compare all other variables in the class
         return obj instanceof Pass;
+    }
+
+    @Override
+    public AbstractAction copy() {
+        return new Pass();
     }
 
     /**
@@ -38,6 +47,11 @@ public class Pass extends DoNothing {
     @Override
     public String getString(AbstractGameState gameState) {
         return toString();
+    }
+
+    @Override
+    public String toString() {
+        return "pass";
     }
 
 

@@ -51,6 +51,7 @@ public class Cook extends AbstractAction {
                 }
                 points+=possible;
             }
+            gamestate.getDiscard().add(ingredient);
             gamestate.getPlayerHands().get(gamestate.getCurrentPlayer()).remove(ingredient);
         }
         gamestate.addPlayerScore(gamestate.getCurrentPlayer(),points);

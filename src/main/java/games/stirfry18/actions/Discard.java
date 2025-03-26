@@ -26,6 +26,7 @@ public class Discard extends AbstractAction {
     public boolean execute(AbstractGameState gs) {
         SF18GameState gameState = (SF18GameState) gs;
         IngredientCard discCard = (IngredientCard) gameState.getComponentById(discardedCard);
+        gameState.getDiscard().add(discCard);
         gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove(discCard);
         return true;
     }

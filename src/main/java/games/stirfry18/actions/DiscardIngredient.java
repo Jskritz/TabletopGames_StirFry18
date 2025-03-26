@@ -33,7 +33,9 @@ public class DiscardIngredient extends AbstractAction {
     public boolean execute(AbstractGameState gs) {
         SF18GameState gameState = (SF18GameState) gs;
         gameState.getActionsChosen().add(PossibleActions.DiscardIngredients);
+        gameState.getDiscard().add((IngredientCard) gameState.getComponentById(discardedCards.get(0)));
         gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove((IngredientCard) gameState.getComponentById(discardedCards.get(0)));
+        gameState.getDiscard().add((IngredientCard) gameState.getComponentById(discardedCards.get(1)));
         gameState.getPlayerHands().get(gameState.getCurrentPlayer()).remove((IngredientCard) gameState.getComponentById(discardedCards.get(1)));
         for(int i=0; i<3; i++){
             IngredientCard draw = gameState.getMainDeck().draw();

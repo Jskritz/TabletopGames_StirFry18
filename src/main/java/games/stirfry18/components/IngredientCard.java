@@ -4,6 +4,8 @@ import core.CoreConstants;
 import core.components.Component;
 import core.components.Card;
 
+import java.util.Objects;
+
 
 /**
  * <p>Components represent a game piece, or encompass some unit of game information (e.g. cards, tokens, score counters, boards, dice etc.)</p>
@@ -50,6 +52,6 @@ public class IngredientCard extends Card {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + cardType.hashCode();
+        return Objects.hash(super.hashCode(), cardType);
     }
 }

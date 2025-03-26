@@ -61,13 +61,17 @@ public class SF18GameState extends AbstractGameState {
         return mainDeck;
     }
 
+    public Deck<IngredientCard> getDiscard() {
+        return discard;
+    }
+
     public Counter[] getPlayerScores() {
         return playerScores;
     }
     public List<PossibleActions> getActionsChosen(){return  actionsChosen;}
 
-    public void addPlayerScore(Integer playerID, Integer ammount){
-        playerScores[playerID].increment(ammount);
+    public void addPlayerScore(Integer playerID, Integer amount){
+        playerScores[playerID].increment(amount);
     }
 
     /**
