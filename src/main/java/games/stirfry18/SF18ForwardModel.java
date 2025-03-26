@@ -7,6 +7,7 @@ import core.actions.AbstractAction;
 import core.actions.DoNothing;
 import core.components.Counter;
 import core.components.Deck;
+import games.hanabi.CardType;
 import games.stirfry18.actions.*;
 import games.stirfry18.components.STF18Card;
 import games.stirfry18.components.IngredientCard;
@@ -78,8 +79,8 @@ public class SF18ForwardModel extends StandardForwardModel {
     @Override
     protected List<AbstractAction> _computeAvailableActions(AbstractGameState gameState) {
         SF18GameState gs = (SF18GameState) gameState;
-        // TODO: no duplicate actions!!!!
         List<AbstractAction> actions = new ArrayList<>();
+        List<STF18Card> discardIngredientAdded = new ArrayList<>();
         if(gs.getGamePhase()==SF18GameState.SF18GamePhases.ActionPhase){
             for(IngredientCard card:gs.getPlayerHands().get(gs.getCurrentPlayer())){
                 switch(card.getCardType()){
@@ -94,7 +95,8 @@ public class SF18ForwardModel extends StandardForwardModel {
                                 if(other.equals(card)){
                                     continue;
                                 }
-                                if(card.getCardType() == other.getCardType()){
+                                if(card.getCardType() == other.getCardType() && !discardIngredientAdded.contains(card.getCardType())){
+                                    discardIngredientAdded.add(card.getCardType());
                                     actions.add(new DiscardIngredient(card.getComponentID(),other.getComponentID()));
                                 }
                             }
