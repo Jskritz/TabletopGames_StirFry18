@@ -78,6 +78,7 @@ public class SF18ForwardModel extends StandardForwardModel {
     @Override
     protected List<AbstractAction> _computeAvailableActions(AbstractGameState gameState) {
         SF18GameState gs = (SF18GameState) gameState;
+        // TODO: no duplicate actions!!!!
         List<AbstractAction> actions = new ArrayList<>();
         if(gs.getGamePhase()==SF18GameState.SF18GamePhases.ActionPhase){
             for(IngredientCard card:gs.getPlayerHands().get(gs.getCurrentPlayer())){
@@ -183,7 +184,7 @@ public class SF18ForwardModel extends StandardForwardModel {
         // End player turn
         if (gs.getGameStatus() == CoreConstants.GameResult.GAME_ONGOING) {
             gs.setGamePhase(SF18GameState.SF18GamePhases.ActionPhase);
-            endPlayerTurn(gs, gs.getCurrentPlayer()+1% gs.getNPlayers());
+            endPlayerTurn(gs, (gs.getCurrentPlayer()+1)% gs.getNPlayers());
         }
 
     }
