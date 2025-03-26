@@ -10,7 +10,7 @@ import games.sushigo.SGGameState;
 public class DiscardProtein extends AbstractAction {
     // Discards one protein card to draw cards equal to its value
 
-    private Integer discardedCard;
+    private final Integer discardedCard;
 
     public DiscardProtein (Integer discardedCard){
         this.discardedCard = discardedCard;
@@ -46,20 +46,17 @@ public class DiscardProtein extends AbstractAction {
      */
     @Override
     public DiscardProtein copy() {
-        // TODO: copy non-final variables appropriately
-        return this;
+        return new DiscardProtein(discardedCard);
     }
 
     @Override
     public boolean equals(Object obj) {
-        // TODO: compare all other variables in the class
-        return obj instanceof DiscardProtein;
+        return obj instanceof DiscardProtein && ((DiscardProtein) obj).discardedCard.equals(discardedCard);
     }
 
     @Override
     public int hashCode() {
-        // TODO: return the hash of all other variables in the class
-        return 0;
+        return discardedCard.hashCode();
     }
 
     @Override

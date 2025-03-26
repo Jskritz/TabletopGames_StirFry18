@@ -39,7 +39,7 @@ public class Discard extends AbstractAction {
     @Override
     public Discard copy() {
 
-        return this;
+        return new Discard(discardedCard);
     }
 
     @Override

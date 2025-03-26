@@ -13,7 +13,7 @@ import java.util.List;
 public class DiscardIngredient extends AbstractAction {
     // Discards two identical card to draw 3 cards
 
-    private List<Integer> discardedCards;
+    private final List<Integer> discardedCards;
 
 
     public DiscardIngredient(Integer firstID, Integer secondID){
@@ -53,20 +53,20 @@ public class DiscardIngredient extends AbstractAction {
      */
     @Override
     public DiscardIngredient copy() {
-        // TODO: copy non-final variables appropriately
-        return this;
+
+        return new DiscardIngredient(discardedCards.get(0), discardedCards.get(1));
     }
 
     @Override
     public boolean equals(Object obj) {
-        // TODO: compare all other variables in the class
-        return obj instanceof DiscardIngredient;
+
+        return obj instanceof DiscardIngredient && ((DiscardIngredient) obj).discardedCards.equals(discardedCards);
     }
 
     @Override
     public int hashCode() {
-        // TODO: return the hash of all other variables in the class
-        return 0;
+
+        return discardedCards.hashCode();
     }
 
     @Override
