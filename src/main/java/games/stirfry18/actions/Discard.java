@@ -51,12 +51,12 @@ public class Discard extends AbstractAction {
     @Override
     public int hashCode() {
 
-        return Objects.hash(this) + discardedCard.hashCode();
+        return discardedCard.hashCode();
     }
 
     @Override
     public String toString() {
-        // TODO: Replace with appropriate string, including any action parameters
+
         String action = "Discard Protein: " + discardedCard.toString();
 
         return action ;

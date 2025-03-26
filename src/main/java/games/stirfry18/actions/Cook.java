@@ -27,7 +27,7 @@ public class Cook extends AbstractAction {
      */
     @Override
     public boolean execute(AbstractGameState gs) {
-        // TODO: Some functionality applied which changes the given game state.
+
         SF18GameState gamestate = (SF18GameState) gs;
         gamestate.getActionsChosen().add(PossibleActions.Cook);
         Integer points =0;
@@ -66,20 +66,20 @@ public class Cook extends AbstractAction {
      */
     @Override
     public Cook copy() {
-        // TODO: copy non-final variables appropriately
+
         return new Cook(ingredients);
     }
 
     @Override
     public boolean equals(Object obj) {
-        // TODO: compare all other variables in the class
+
         return obj instanceof Cook && ((Cook) obj).ingredients.equals(this.ingredients);
     }
 
     @Override
     public int hashCode() {
-        // TODO: return the hash of all other variables in the class
-        return Objects.hash(this) + ingredients.hashCode();
+
+        return ingredients.hashCode();
     }
 
     @Override
