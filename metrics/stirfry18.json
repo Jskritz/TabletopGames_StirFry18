@@ -1,0 +1,17 @@
+{
+  "class": "evaluation.listeners.MetricsGameListener",
+  "args": [
+    {
+      "class" : "evaluation.loggers.SummaryLogger"
+    },
+    [
+      {"class": "evaluation.metrics.GameMetrics$GameScore" },
+      {"class": "evaluation.metrics.GameMetrics$FinalScore" },
+      {"class": "evaluation.metrics.GameMetrics$StateSpace" },
+      {"class": "evaluation.metrics.GameMetrics$ComputationTimes" },
+      {"class": "evaluation.metrics.GameMetrics$Decisions" },
+      {"class": "evaluation.metrics.GameMetrics$Actions" },
+      {"class": "games.stirfry18.metrics.SF18Metrics$CookList"}
+    ]
+  ]
+}

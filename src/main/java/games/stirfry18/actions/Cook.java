@@ -14,7 +14,7 @@ import java.util.Set;
 public class Cook extends AbstractAction {
     // cook and score. uses 3 to 5 ingredients and need at least 1 noodle, cannot use more than one of the same ingredient
 
-    Set<Integer> ingredients;
+    public Set<Integer> ingredients;
 
     public Cook(Set<Integer> ingredients) {
         this.ingredients = ingredients;
