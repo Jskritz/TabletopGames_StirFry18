@@ -5,7 +5,9 @@ import core.actions.AbstractAction;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.components.IngredientCard;
 import games.stirfry18.components.STF18Card;
+import org.checkerframework.checker.units.qual.C;
 
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -65,19 +67,19 @@ public class Cook extends AbstractAction {
     @Override
     public Cook copy() {
         // TODO: copy non-final variables appropriately
-        return this;
+        return new Cook(ingredients);
     }
 
     @Override
     public boolean equals(Object obj) {
         // TODO: compare all other variables in the class
-        return obj instanceof Cook;
+        return obj instanceof Cook && ((Cook) obj).ingredients.equals(this.ingredients);
     }
 
     @Override
     public int hashCode() {
         // TODO: return the hash of all other variables in the class
-        return 0;
+        return Objects.hash(this) + ingredients.hashCode();
     }
 
     @Override

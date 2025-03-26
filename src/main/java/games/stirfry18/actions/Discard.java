@@ -5,11 +5,13 @@ import core.actions.AbstractAction;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.components.IngredientCard;
 
+import java.util.Objects;
+
 
 public class Discard extends AbstractAction {
     // Discards one protein card to draw cards equal to its value
 
-    private Integer discardedCard;
+    private final Integer discardedCard;
 
     public Discard(Integer discardedCard){
         this.discardedCard = discardedCard;
@@ -36,20 +38,20 @@ public class Discard extends AbstractAction {
      */
     @Override
     public Discard copy() {
-        // TODO: copy non-final variables appropriately
+
         return this;
     }
 
     @Override
     public boolean equals(Object obj) {
-        // TODO: compare all other variables in the class
-        return obj instanceof Discard;
+
+        return obj instanceof Discard && Objects.equals(((Discard) obj).discardedCard, discardedCard);
     }
 
     @Override
     public int hashCode() {
-        // TODO: return the hash of all other variables in the class
-        return 0;
+
+        return Objects.hash(this) + discardedCard.hashCode();
     }
 
     @Override
