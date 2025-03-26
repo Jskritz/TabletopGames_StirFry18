@@ -194,9 +194,9 @@ public class SF18ForwardModel extends StandardForwardModel {
             gs.getPlayerHands().get((gs.getCurrentPlayer()+1)% gs.getNPlayers()).add(gs.mainDeck.draw());
             endPlayerTurn(gs, (gs.getCurrentPlayer()+1)% gs.getNPlayers());
         }
-        // TODO: end the game BRUH
+
         for (int i =0 ; i<gs.getNPlayers();i++){
-            if(gs.getGameScore(i)>=30){
+            if(gs.getGameScore(i)>=50){
                 endGame(gs);
             }
         }

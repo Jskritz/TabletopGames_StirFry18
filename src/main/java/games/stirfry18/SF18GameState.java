@@ -11,6 +11,9 @@ import games.GameType;
 import games.stirfry18.actions.PossibleActions;
 import games.stirfry18.components.IngredientCard;
 import games.sushigo.SGGameState;
+import players.heuristics.LeaderHeuristic;
+import players.heuristics.OrdinalPosition;
+import players.heuristics.ScoreHeuristic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -136,8 +139,14 @@ public class SF18GameState extends AbstractGameState {
     @Override
     protected double _getHeuristicScore(int playerId) {
         if (isNotTerminal()) {
-            // TODO calculate an approximate value
-            return 0;
+            OrdinalPosition heuristic = new OrdinalPosition();
+
+            //ScoreHeuristic heuristic = new ScoreHeuristic();
+
+            //LeaderHeuristic heuristic = new LeaderHeuristic();
+
+            return heuristic.evaluateState(this,playerId);
+
         } else {
             // The game finished, we can instead return the actual result of the game for the given player.
             return getPlayerResults()[playerId].value;
