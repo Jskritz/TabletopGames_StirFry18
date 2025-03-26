@@ -10,6 +10,7 @@ import evaluation.summarisers.TAGStatSummary;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.SF18Parameters;
 import games.stirfry18.actions.Cook;
+import games.stirfry18.components.IngredientCard;
 import utilities.Pair;
 
 import java.util.Collections;
@@ -39,10 +40,10 @@ public class SF18Metrics implements IMetricsCollection {
                 Cook action = (Cook)e.action;
                 String cookList="";
                 for(int ingredient : action.ingredients){
-                    cookList = cookList + gs.getComponentById(ingredient).toString() + "-";
+                    cookList = cookList + ((IngredientCard) gs.getComponentById(ingredient)).getCardType().toString() + "-";
                 }
 
-                records.put("Cooked with ", cookList);
+                records.put("Cooked with -", cookList);
                 return true;
             }
             else {
@@ -61,21 +62,21 @@ public class SF18Metrics implements IMetricsCollection {
         }
 
         // Count how many times a card is used on cooking
-        public Map<String, Object> postProcessingGameOver(Event e, TAGStatSummary recordedData) {
-            // Process the recorded data during the game and return game over summarised data
-            //TODO: still on sushigo
-            Map<String, Object> toRecord = new HashMap<>();
-            Map<String, Object> summaryData = recordedData.getSummary();
-            SF18Parameters params = (SF18Parameters) e.state.getGameParameters();
-            for (String k: summaryData.keySet()) {
-                String[] split = k.split("-");
-                SGCard.SGCardType type = SGCard.SGCardType.valueOf(split[0]);
-                int count = 1;
-                if (split.length > 1) count = Integer.parseInt(split[1]);
-                toRecord.put(getClass().getSimpleName() + "(" + k + "):" + e.type, ((TAGOccurrenceStatSummary)recordedData).getElements().get(k) * 1.0 / params.nCardsPerType.get(new Pair<>(type, count)));
-            }
-            return toRecord;
-        }
+//        public Map<String, Object> postProcessingGameOver(Event e, TAGStatSummary recordedData) {
+//            // Process the recorded data during the game and return game over summarised data
+//            //TODO: still on sushigo
+//            Map<String, Object> toRecord = new HashMap<>();
+//            Map<String, Object> summaryData = recordedData.getSummary();
+//            SF18Parameters params = (SF18Parameters) e.state.getGameParameters();
+//            for (String k: summaryData.keySet()) {
+//                String[] split = k.split("-");
+//                SGCard.SGCardType type = SGCard.SGCardType.valueOf(split[0]);
+//                int count = 1;
+//                if (split.length > 1) count = Integer.parseInt(split[1]);
+//                toRecord.put(getClass().getSimpleName() + "(" + k + "):" + e.type, ((TAGOccurrenceStatSummary)recordedData).getElements().get(k) * 1.0 / params.nCardsPerType.get(new Pair<>(type, count)));
+//            }
+//            return toRecord;
+//        }
 
     }
 
