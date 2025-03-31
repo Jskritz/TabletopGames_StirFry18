@@ -1,9 +1,11 @@
 {
   "class": "evaluation.listeners.MetricsGameListener",
-  "args": [
-    {
-      "class" : "evaluation.loggers.SummaryLogger"
-    },
+  "args":  [
+    {"enum" : "evaluation.metrics.IDataLogger$ReportDestination", "value" : "ToFile"},
+    [
+      {"enum" : "evaluation.metrics.IDataLogger$ReportType", "value" : "RawDataPerEvent"},
+      {"enum" : "evaluation.metrics.IDataLogger$ReportType", "value" : "Summary"}
+    ],
     [
       {"class": "evaluation.metrics.GameMetrics$GameScore" },
       {"class": "evaluation.metrics.GameMetrics$FinalScore" },
@@ -12,6 +14,5 @@
       {"class": "evaluation.metrics.GameMetrics$Decisions" },
       {"class": "evaluation.metrics.GameMetrics$Actions" },
       {"class": "games.stirfry18.metrics.SF18Metrics$CookList"}
-    ]
-  ]
+    ]]
 }

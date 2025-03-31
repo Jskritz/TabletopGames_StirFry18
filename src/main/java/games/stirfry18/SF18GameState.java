@@ -5,15 +5,12 @@ import core.AbstractParameters;
 import core.components.Component;
 import core.components.Counter;
 import core.components.Deck;
-import core.components.PartialObservableDeck;
 import core.interfaces.IGamePhase;
 import games.GameType;
 import games.stirfry18.actions.PossibleActions;
 import games.stirfry18.components.IngredientCard;
-import games.sushigo.SGGameState;
-import players.heuristics.LeaderHeuristic;
+import games.stirfry18.components.SF18Card;
 import players.heuristics.OrdinalPosition;
-import players.heuristics.ScoreHeuristic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +55,15 @@ public class SF18GameState extends AbstractGameState {
 
     public List<Deck<IngredientCard>> getPlayerHands() {
         return playerHands;
+    }
+    public List<SF18Card> getCardTypeInHand(int playerID){
+        List<SF18Card> cardsInHand = new ArrayList<>();
+        Deck<IngredientCard> deck = playerHands.get(playerID);
+        for(IngredientCard card : deck){
+            cardsInHand.add(card.getCardType());
+        }
+
+        return cardsInHand;
     }
 
     public Deck<IngredientCard> getMainDeck() {

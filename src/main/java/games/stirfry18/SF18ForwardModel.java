@@ -7,13 +7,11 @@ import core.actions.AbstractAction;
 import core.actions.DoNothing;
 import core.components.Counter;
 import core.components.Deck;
-import games.hanabi.CardType;
 import games.stirfry18.actions.*;
-import games.stirfry18.components.STF18Card;
+import games.stirfry18.components.SF18Card;
 import games.stirfry18.components.IngredientCard;
 
 
-import java.io.Console;
 import java.util.*;
 
 /**
@@ -52,7 +50,7 @@ public class SF18ForwardModel extends StandardForwardModel {
         gs.discard = new Deck<>("Discard pile", CoreConstants.VisibilityMode.HIDDEN_TO_ALL);
 
         // add cards to main deck
-        for(STF18Card type : STF18Card.values()){
+        for(SF18Card type : SF18Card.values()){
             for(int i=0; i<type.getQuantity(); i++){
                 gs.mainDeck.add(new IngredientCard(type));
             }
@@ -82,7 +80,7 @@ public class SF18ForwardModel extends StandardForwardModel {
     protected List<AbstractAction> _computeAvailableActions(AbstractGameState gameState) {
         SF18GameState gs = (SF18GameState) gameState;
         List<AbstractAction> actions = new ArrayList<>();
-        List<STF18Card> discardIngredientAdded = new ArrayList<>();
+        List<SF18Card> discardIngredientAdded = new ArrayList<>();
         if(gs.getGamePhase()==SF18GameState.SF18GamePhases.ActionPhase){
             for(IngredientCard card:gs.getPlayerHands().get(gs.getCurrentPlayer())){
                 switch(card.getCardType()){
@@ -108,27 +106,22 @@ public class SF18ForwardModel extends StandardForwardModel {
             }
 
             //TODO: Check if this madness work @>@ creates options, still need to see if it correctly creates all options
+
             if(!gs.actionsChosen.contains(PossibleActions.Cook)){
-                if(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().anyMatch(x -> x.getCardType() == STF18Card.NOODLES)){ // need noodles to cook
-                    Set<IngredientCard> filteredHand = new HashSet<>(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().toList()); //cannot use replicated cards
+                if(gs.getPlayerHands().get(gs.getCurrentPlayer()).stream().anyMatch(x -> x.getCardType() == SF18Card.NOODLES)){ // need noodles to cook
+                    Deck<IngredientCard> hand = gs.getPlayerHands().get(gs.getCurrentPlayer());
+                    List<IngredientCard> cards = hand.getComponents();
+                    Set<SF18Card> filteredHand = new HashSet<>(gs.getCardTypeInHand(gs.getCurrentPlayer()).stream().toList()); //cannot use replicated cards
                     if(filteredHand.size()>=3){ // need at least 3 cards
                         if(filteredHand.size()<=5){ // can use a maximum of 5 cards
-                            Set<Integer> cardIDs = new HashSet<>();
-                            for (IngredientCard card: filteredHand){
-                                cardIDs.add(card.getComponentID());
-                            }
-                            actions.add(new Cook(cardIDs));
+                            addCookRecipe(actions, cards, filteredHand);
 
                         }
                         else{// with more than 5 we need to select 5
-                            Set<Set<IngredientCard>> possibleRecipies = getIngretientsSubsets(filteredHand);
-                            for(Set<IngredientCard> possible:possibleRecipies){
-                                if(possible.size()==5 && possible.stream().anyMatch(x->x.getCardType()==STF18Card.NOODLES)){
-                                    Set<Integer> cardIDs = new HashSet<>();
-                                    for (IngredientCard card: possible){
-                                        cardIDs.add(card.getComponentID());
-                                    }
-                                    actions.add(new Cook(cardIDs));
+                            Set<Set<SF18Card>> possibleRecipies = getIngretientsSubsets(filteredHand);
+                            for(Set<SF18Card> possible:possibleRecipies){
+                                if(possible.size()==5 && possible.stream().anyMatch(x->x == SF18Card.NOODLES)){
+                                    addCookRecipe(actions, cards, filteredHand);
                                 }
                             }
                         }
@@ -150,13 +143,26 @@ public class SF18ForwardModel extends StandardForwardModel {
         return actions;
     }
 
-    public Set<Set<IngredientCard>> getIngretientsSubsets(Set<IngredientCard> set) {
+    private void addCookRecipe(List<AbstractAction> actions, List<IngredientCard> cards, Set<SF18Card> filteredHand) {
+        Set<Integer> cardIDs = new HashSet<>();
+        for (SF18Card cardType: filteredHand){
+            IngredientCard card = cards.stream().filter(x -> x.getCardType() == cardType).findFirst().get();
+            cardIDs.add(card.getComponentID());
+        }
+        Cook cookAction = new Cook(cardIDs);
+        if(actions.contains(cookAction)){
+            return;
+        }
+        actions.add(new Cook(cardIDs));
+    }
+
+    public Set<Set<SF18Card>> getIngretientsSubsets(Set<SF18Card> set) {
         if (set.isEmpty()) {
             return Collections.singleton(Collections.emptySet());
         }
 
-        Set<Set<IngredientCard>> subSets = set.stream().map(item -> {
-                    Set<IngredientCard> clone = new HashSet<>(set);
+        Set<Set<SF18Card>> subSets = set.stream().map(item -> {
+                    Set<SF18Card> clone = new HashSet<>(set);
                     clone.remove(item);
                     return clone;
                 }).map(this::getIngretientsSubsets)

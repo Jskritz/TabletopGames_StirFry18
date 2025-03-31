@@ -1,6 +1,6 @@
 package games.stirfry18.components;
 
-public enum STF18Card {
+public enum SF18Card {
     SHRIMP("Shrimp", 6, 4, 1),
     PORK("Pork", 5, 3, 1),
     CHICKEN("Chicken", 3, 2, 1),
@@ -16,7 +16,7 @@ public enum STF18Card {
     private final int quantity;
     private Synergy[] synergies;
 
-    STF18Card(String name, int basePoints, int discardCardDraws, int quantity) {
+    SF18Card(String name, int basePoints, int discardCardDraws, int quantity) {
         this.name = name;
         this.basePoints = basePoints;
         this.discardCardDraws = discardCardDraws;
@@ -55,20 +55,20 @@ public enum STF18Card {
     }
 
     public static class Synergy {
-        private final STF18Card[] conditions;
+        private final SF18Card[] conditions;
         private final int points;
 
-        public Synergy(STF18Card condition, int points) {
-            this.conditions = new STF18Card[]{condition};
+        public Synergy(SF18Card condition, int points) {
+            this.conditions = new SF18Card[]{condition};
             this.points = points;
         }
 
-        public Synergy(STF18Card condition1, STF18Card condition2, int points) {
-            this.conditions = new STF18Card[]{condition1, condition2};
+        public Synergy(SF18Card condition1, SF18Card condition2, int points) {
+            this.conditions = new SF18Card[]{condition1, condition2};
             this.points = points;
         }
 
-        public STF18Card[] getConditions() {
+        public SF18Card[] getConditions() {
             return conditions;
         }
 

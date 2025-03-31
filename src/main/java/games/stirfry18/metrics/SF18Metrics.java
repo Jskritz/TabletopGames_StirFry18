@@ -28,7 +28,7 @@ public class SF18Metrics implements IMetricsCollection {
         @Override
         public Map<String, Class<?>> getColumns(int nPlayersPerGame, Set<String> playerNames) {
             Map<String, Class<?>> columns = new HashMap<>();
-            columns.put("Cooked ingredients", String.class);
+            columns.put("Cooked with -", String.class);
             return columns;
         }
 
@@ -92,7 +92,7 @@ public class SF18Metrics implements IMetricsCollection {
         @Override
         protected boolean _run(MetricsGameListener listener, Event e, Map<String, Object> records) {
 
-            SGGameState gs = (SGGameState) e.state;
+            SF18GameState gs = (SF18GameState) e.state;
             if(e.action instanceof Cook){
                 Cook action = (Cook)e.action;
                 String cookList="";

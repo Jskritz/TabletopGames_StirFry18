@@ -4,10 +4,8 @@ import core.AbstractGameState;
 import core.actions.AbstractAction;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.components.IngredientCard;
-import games.stirfry18.components.STF18Card;
-import org.checkerframework.checker.units.qual.C;
+import games.stirfry18.components.SF18Card;
 
-import java.util.Objects;
 import java.util.Set;
 
 
@@ -38,9 +36,9 @@ public class Cook extends AbstractAction {
             }
             else {
                 int possible = ingredient.getCardType().getBasePoints();
-                for(STF18Card.Synergy synergy : ingredient.getCardType().getSynergies()){
+                for(SF18Card.Synergy synergy : ingredient.getCardType().getSynergies()){
                     boolean haveSynergy = true;
-                    for(STF18Card condition : synergy.getConditions()){
+                    for(SF18Card condition : synergy.getConditions()){
                         if(gamestate.getPlayerHands().get(gamestate.getCurrentPlayer()).stream().anyMatch(x-> x.getCardType() != condition)){
                             haveSynergy=false;
                         }

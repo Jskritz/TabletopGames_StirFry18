@@ -1,6 +1,5 @@
 package games.stirfry18.components;
 
-import core.CoreConstants;
 import core.components.Component;
 import core.components.Card;
 
@@ -17,19 +16,19 @@ import java.util.Objects;
  */
 public class IngredientCard extends Card {
 
-    public final STF18Card cardType;
+    public final SF18Card cardType;
 
-    public IngredientCard(STF18Card cardType) {
+    public IngredientCard(SF18Card cardType) {
         super(cardType.toString());
         this.cardType = cardType;
     }
 
-    public IngredientCard(STF18Card cardType, int componentID) {
+    public IngredientCard(SF18Card cardType, int componentID) {
         super(cardType.toString(), componentID);
         this.cardType = cardType;
     }
 
-    public STF18Card getCardType() {
+    public SF18Card getCardType() {
         return cardType;
     }
 
