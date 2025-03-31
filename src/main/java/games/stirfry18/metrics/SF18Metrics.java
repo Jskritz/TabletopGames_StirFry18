@@ -13,10 +13,7 @@ import games.stirfry18.actions.Cook;
 import games.stirfry18.components.IngredientCard;
 import utilities.Pair;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SF18Metrics implements IMetricsCollection {
 
@@ -31,18 +28,24 @@ public class SF18Metrics implements IMetricsCollection {
             columns.put("Cooked with -", String.class);
             return columns;
         }
-
+        // TODO: remove ordering in cook action (noodle - ginger) is the same as (ginger - noodle)
         @Override
         protected boolean _run(MetricsGameListener listener, Event e, Map<String, Object> records) {
 
             SF18GameState gs = (SF18GameState) e.state;
             if(e.action instanceof Cook){
                 Cook action = (Cook)e.action;
+                List<String> cookRecipe =new ArrayList<>();
                 String cookList="";
                 for(int ingredient : action.ingredients){
-                    cookList = cookList + ((IngredientCard) gs.getComponentById(ingredient)).getCardType().toString() + "-";
-                }
+                    IngredientCard card = (IngredientCard) gs.getComponentById(ingredient);
+                    cookRecipe.add(card.getCardType().toString());
 
+                }
+                Collections.sort(cookRecipe);
+                for (String card :cookRecipe){
+                    cookList = cookList + card + "-";
+                }
                 records.put("Cooked with -", cookList);
                 return true;
             }
