@@ -2,6 +2,7 @@ package games.stirfry18;
 
 import core.AbstractGameState;
 import core.AbstractParameters;
+import core.CoreConstants;
 import core.components.Component;
 import core.components.Counter;
 import core.components.Deck;
@@ -11,11 +12,9 @@ import games.stirfry18.actions.PossibleActions;
 import games.stirfry18.components.IngredientCard;
 import games.stirfry18.components.SF18Card;
 import players.heuristics.OrdinalPosition;
+import scala.Int;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * <p>The game state encapsulates all game information. It is a data-only class, with game functionality present
@@ -92,7 +91,7 @@ public class SF18GameState extends AbstractGameState {
     @Override
     protected List<Component> _getAllComponents() {
         List<Component> components = new ArrayList<>();
-        for (int i =0; i<playerHands.size();i++) {
+        for (int i =0; i<nPlayers;i++) {
             components.add(playerHands.get(i));
             components.add(playerScores[i]);
         }
@@ -120,17 +119,42 @@ public class SF18GameState extends AbstractGameState {
      */
     @Override
     protected SF18GameState _copy(int playerId) {
+        // TODO: shuffle hidden information
         SF18GameState copy = new SF18GameState(gameParameters, getNPlayers());
         copy.playerScores = new Counter[nPlayers];
         for (int i =0 ; i<nPlayers;i++){
             copy.playerScores[i] = playerScores[i].copy();
         }
+        // copy hands
         copy.playerHands = new ArrayList<>();
         for(Deck<IngredientCard> d : playerHands){
             copy.playerHands.add(d.copy());
         }
-        copy.discard = discard.copy();
-        copy.mainDeck = mainDeck.copy();
+        // copy main deck
+        copy.mainDeck = this.mainDeck.copy();
+
+        // put player hand cards into deck
+        for ( int i = 0; i< nPlayers;i++){
+            if(!(i == playerId)) {
+                copy.mainDeck.add(copy.playerHands.get(i));
+            }
+        }
+        //shuffle deck
+        copy.mainDeck.shuffle(redeterminisationRnd);
+
+        for ( int i = 0; i< nPlayers;i++){
+            if(!(i == playerId)){
+                Deck<IngredientCard> hand = copy.playerHands.get(i);
+                int nCardsInHand = hand.getSize();
+                hand.clear();
+                for(int j=0; j<nCardsInHand;j++){
+                    hand.add(copy.mainDeck.draw());
+                }
+            }
+        }
+//
+        copy.discard = discard.copy(); // TODO: with bluffing this should be shuffled
+
         copy.actionsChosen = new ArrayList<>();
         copy.actionsChosen.addAll(actionsChosen);
 
@@ -182,9 +206,18 @@ public class SF18GameState extends AbstractGameState {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(playerHands,mainDeck,discard,playerHands,actionsChosen);
+        int result = Objects.hash(playerHands,mainDeck,discard,actionsChosen);
         result = 76*result* Arrays.hashCode(playerScores);
         return result;
+    }
+
+    public String toString() {
+        return  playerHands.hashCode() + "|" +
+                mainDeck.hashCode() + "|" +
+                discard.hashCode() + "|" +
+                actionsChosen.hashCode() + "|" +
+                Arrays.hashCode(playerScores) + "|" +
+                super.hashCode() + "|";
     }
 
     // TODO: Consider the methods below for possible implementation
