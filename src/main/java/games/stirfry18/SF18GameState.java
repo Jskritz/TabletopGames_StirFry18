@@ -13,6 +13,7 @@ import games.stirfry18.components.IngredientCard;
 import games.stirfry18.components.SF18Card;
 import players.heuristics.OrdinalPosition;
 import scala.Int;
+import utilities.DeterminisationUtilities;
 
 import java.util.*;
 
@@ -48,7 +49,7 @@ public class SF18GameState extends AbstractGameState {
      */
     @Override
     protected GameType _getGameType() {
-        // TODO: replace with game-specific enum value declared in GameType
+
         return GameType.StirFry18;
     }
 
@@ -131,19 +132,32 @@ public class SF18GameState extends AbstractGameState {
             copy.playerHands.add(d.copy());
         }
         // copy main deck
-        copy.mainDeck = this.mainDeck.copy();
+        copy.mainDeck = mainDeck.copy();
+
+//        List<Deck<IngredientCard>> toReshuffle = new ArrayList<>();
+//        toReshuffle.add(copy.mainDeck);
+//        for (int i =0 ; i<copy.getPlayerHands().size();i++){
+//           if(i!=playerId){
+//               toReshuffle.add(copy.playerHands.get(i));
+//           }
+//        }
+//        DeterminisationUtilities.reshuffle(playerId,
+//                toReshuffle,
+//                i->true,
+//                redeterminisationRnd
+//        );
 
         // put player hand cards into deck
-        for ( int i = 0; i< nPlayers;i++){
-            if(!(i == playerId)) {
+        for ( int i = 0; i< copy.playerHands.size();i++){
+            if(i != playerId) {
                 copy.mainDeck.add(copy.playerHands.get(i));
             }
         }
         //shuffle deck
         copy.mainDeck.shuffle(redeterminisationRnd);
-
-        for ( int i = 0; i< nPlayers;i++){
-            if(!(i == playerId)){
+//
+        for ( int i = 0; i< copy.playerHands.size();i++){
+            if(i != playerId){
                 Deck<IngredientCard> hand = copy.playerHands.get(i);
                 int nCardsInHand = hand.getSize();
                 hand.clear();
