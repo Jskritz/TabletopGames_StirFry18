@@ -58,7 +58,7 @@ public class Discard extends AbstractAction {
     @Override
     public String toString() {
 
-        String action = "Discard Protein: " + discardedCard.toString();
+        String action = "Discard: " + discardedCard.toString();
 
         return action ;
     }

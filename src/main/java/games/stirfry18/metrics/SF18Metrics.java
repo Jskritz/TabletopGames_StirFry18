@@ -31,7 +31,6 @@ public class SF18Metrics implements IMetricsCollection {
             columns.put("Cooked with -", String.class);
             return columns;
         }
-        // TODO: remove ordering in cook action (noodle - ginger) is the same as (ginger - noodle)
         @Override
         protected boolean _run(MetricsGameListener listener, Event e, Map<String, Object> records) {
 
@@ -171,6 +170,48 @@ public class SF18Metrics implements IMetricsCollection {
         @Override
         public Set<IGameEvent> getDefaultEventTypes() {
             return Collections.singleton(Event.GameEvent.ACTION_CHOSEN);
+        }
+
+    }
+
+    public static class FavoredCards extends AbstractMetric {
+        // Get cards that were kept in hand in preference of the discarded card
+        @Override
+        public Map<String, Class<?>> getColumns(int nPlayersPerGame, Set<String> playerNames) {
+            Map<String, Class<?>> columns = new HashMap<>();
+            columns.put("Discarded card",String.class);
+            columns.put("Favored Cards", String.class);
+            return columns;
+        }
+
+        @Override
+        protected boolean _run(MetricsGameListener listener, Event e, Map<String, Object> records) {
+
+            SF18GameState gs = (SF18GameState) e.state;
+            if(e.action instanceof Discard){
+                Discard action = (Discard)e.action;
+                List<String> cardsKept =new ArrayList<>();
+                String handList="";
+                for(IngredientCard ingredient : gs.getPlayerHands().get(e.playerID)){
+                    cardsKept.add(ingredient.getCardType().toString());
+
+                }
+                Collections.sort(cardsKept);
+                for (String card :cardsKept){
+                    handList = handList + card + "-";
+                }
+                records.put("Discarded card", gs.getComponentById(action.discardedCard).toString());
+                records.put("Favored Cards", handList);
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        }
+        @Override
+        public Set<IGameEvent> getDefaultEventTypes() {
+            return Collections.singleton(Event.GameEvent.ACTION_TAKEN);
         }
 
     }
