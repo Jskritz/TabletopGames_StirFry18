@@ -13,7 +13,7 @@ import java.util.List;
 public class DiscardIngredient extends AbstractAction {
     // Discards two identical card to draw 3 cards
 
-    private final List<Integer> discardedCards;
+    public final List<Integer> discardedCards;
 
 
     public DiscardIngredient(Integer firstID, Integer secondID){

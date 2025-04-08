@@ -10,6 +10,9 @@ import evaluation.summarisers.TAGStatSummary;
 import games.stirfry18.SF18GameState;
 import games.stirfry18.SF18Parameters;
 import games.stirfry18.actions.Cook;
+import games.stirfry18.actions.Discard;
+import games.stirfry18.actions.DiscardIngredient;
+import games.stirfry18.actions.DiscardProtein;
 import games.stirfry18.components.IngredientCard;
 import utilities.Pair;
 
@@ -113,6 +116,55 @@ public class SF18Metrics implements IMetricsCollection {
 //            SGCard c = gs.getPlayerHands().get(action.playerId).get(action.cardIdx);
 //            records.put("Card played", c.toString());
 
+
+        }
+
+        @Override
+        public Set<IGameEvent> getDefaultEventTypes() {
+            return Collections.singleton(Event.GameEvent.ACTION_CHOSEN);
+        }
+
+    }
+
+    public static class DiscardedCards extends AbstractMetric {
+
+        @Override
+        public Map<String, Class<?>> getColumns(int nPlayersPerGame, Set<String> playerNames) {
+            Map<String, Class<?>> columns = new HashMap<>();
+            columns.put("Discard Reason", String.class);
+            columns.put("Discarded Card", String.class);
+            return columns;
+        }
+
+        @Override
+        protected boolean _run(MetricsGameListener listener, Event e, Map<String, Object> records) {
+
+            SF18GameState gs = (SF18GameState) e.state;
+            if(e.action instanceof Discard){
+                Discard action = (Discard)e.action;
+
+                records.put("Discard Reason", "End of Turn");
+                records.put("Discarded Card", gs.getComponentById(action.discardedCard).toString());
+
+                return true;
+            }
+            else if(e.action instanceof DiscardProtein) {
+                DiscardProtein action = (DiscardProtein)e.action;
+
+                records.put("Discard Reason", "Protein Action");
+                records.put("Discarded Card", gs.getComponentById(action.discardedCard).toString());
+
+                return true;
+
+            } else if(e.action instanceof DiscardIngredient) {
+                DiscardIngredient action = (DiscardIngredient)e.action;
+
+                records.put("Discard Reason", "Ingredient Action");
+                records.put("Discarded Card", gs.getComponentById(action.discardedCards.get(0)).toString());
+                return true;
+            }
+
+            return false;
 
         }
 

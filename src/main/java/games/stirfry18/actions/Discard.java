@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Discard extends AbstractAction {
     // Discards one protein card to draw cards equal to its value
 
-    private final Integer discardedCard;
+    public final Integer discardedCard;
 
     public Discard(Integer discardedCard){
         this.discardedCard = discardedCard;

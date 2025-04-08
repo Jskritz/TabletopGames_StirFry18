@@ -10,7 +10,7 @@ import games.sushigo.SGGameState;
 public class DiscardProtein extends AbstractAction {
     // Discards one protein card to draw cards equal to its value
 
-    private final Integer discardedCard;
+    public final Integer discardedCard;
 
     public DiscardProtein (Integer discardedCard){
         this.discardedCard = discardedCard;

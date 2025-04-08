@@ -13,6 +13,7 @@
       {"class": "evaluation.metrics.GameMetrics$ComputationTimes" },
       {"class": "evaluation.metrics.GameMetrics$Decisions" },
       {"class": "evaluation.metrics.GameMetrics$Actions" },
-      {"class": "games.stirfry18.metrics.SF18Metrics$CookList"}
+      {"class": "games.stirfry18.metrics.SF18Metrics$CookList"},
+      {"class": "games.stirfry18.metrics.SF18Metrics$DiscardedCards"}
     ]]
 }

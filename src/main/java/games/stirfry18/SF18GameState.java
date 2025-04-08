@@ -146,26 +146,26 @@ public class SF18GameState extends AbstractGameState {
 //                i->true,
 //                redeterminisationRnd
 //        );
-
-        // put player hand cards into deck
-        for ( int i = 0; i< copy.playerHands.size();i++){
-            if(i != playerId) {
-                copy.mainDeck.add(copy.playerHands.get(i));
-            }
-        }
-        //shuffle deck
-        copy.mainDeck.shuffle(redeterminisationRnd);
 //
-        for ( int i = 0; i< copy.playerHands.size();i++){
-            if(i != playerId){
-                Deck<IngredientCard> hand = copy.playerHands.get(i);
-                int nCardsInHand = hand.getSize();
-                hand.clear();
-                for(int j=0; j<nCardsInHand;j++){
-                    hand.add(copy.mainDeck.draw());
-                }
-            }
-        }
+//        // put player hand cards into deck
+//        for ( int i = 0; i< copy.playerHands.size();i++){
+//            if(i != playerId) {
+//                copy.mainDeck.add(copy.playerHands.get(i));
+//            }
+//        }
+//        //shuffle deck
+//        copy.mainDeck.shuffle(redeterminisationRnd);
+////
+//        for ( int i = 0; i< copy.playerHands.size();i++){
+//            if(i != playerId){
+//                Deck<IngredientCard> hand = copy.playerHands.get(i);
+//                int nCardsInHand = hand.getSize();
+//                hand.clear();
+//                for(int j=0; j<nCardsInHand;j++){
+//                    hand.add(copy.mainDeck.draw());
+//                }
+//            }
+//        }
 //
         copy.discard = discard.copy(); // TODO: with bluffing this should be shuffled
 
