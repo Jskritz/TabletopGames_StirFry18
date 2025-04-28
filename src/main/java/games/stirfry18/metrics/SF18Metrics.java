@@ -85,45 +85,7 @@ public class SF18Metrics implements IMetricsCollection {
 
     }
 
-    public static class CookFrequency extends AbstractMetric {
 
-        @Override
-        public Map<String, Class<?>> getColumns(int nPlayersPerGame, Set<String> playerNames) {
-            Map<String, Class<?>> columns = new HashMap<>();
-            columns.put("Cooked ingredients", String.class);
-            return columns;
-        }
-
-        @Override
-        protected boolean _run(MetricsGameListener listener, Event e, Map<String, Object> records) {
-
-            SF18GameState gs = (SF18GameState) e.state;
-            if(e.action instanceof Cook){
-                Cook action = (Cook)e.action;
-                String cookList="";
-                for(int ingredient : action.ingredients){
-                    cookList = cookList + gs.getComponentById(ingredient).toString() + "-";
-                }
-
-                records.put("Cooked with ", cookList);
-                return true;
-            }
-            else {
-                return false;
-            }
-//            Cook action = (Cook)e.action;
-//            SGCard c = gs.getPlayerHands().get(action.playerId).get(action.cardIdx);
-//            records.put("Card played", c.toString());
-
-
-        }
-
-        @Override
-        public Set<IGameEvent> getDefaultEventTypes() {
-            return Collections.singleton(Event.GameEvent.ACTION_CHOSEN);
-        }
-
-    }
 
     public static class DiscardedCards extends AbstractMetric {
 
