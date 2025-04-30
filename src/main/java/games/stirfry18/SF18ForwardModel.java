@@ -60,7 +60,7 @@ public class SF18ForwardModel extends StandardForwardModel {
         // deal player hands
         gs.playerHands = new ArrayList<>();
         for( int i=0; i< gs.getNPlayers();i++){
-            gs.playerHands.add(new Deck<IngredientCard>("Player " + i + " hand", CoreConstants.VisibilityMode.VISIBLE_TO_OWNER));
+            gs.playerHands.add(new Deck<IngredientCard>("Player " + i + " hand", i , CoreConstants.VisibilityMode.VISIBLE_TO_OWNER));
             for( int j=0; j<3; j++){
                 gs.playerHands.get(i).add(gs.mainDeck.draw());
             }

@@ -134,18 +134,22 @@ public class SF18GameState extends AbstractGameState {
         // copy main deck
         copy.mainDeck = mainDeck.copy();
 
-//        List<Deck<IngredientCard>> toReshuffle = new ArrayList<>();
-//        toReshuffle.add(copy.mainDeck);
+        List<Deck<IngredientCard>> toReshuffle = new ArrayList<>();
+        toReshuffle.add(copy.mainDeck);
+        toReshuffle.addAll(copy.playerHands);
 //        for (int i =0 ; i<copy.getPlayerHands().size();i++){
 //           if(i!=playerId){
 //               toReshuffle.add(copy.playerHands.get(i));
 //           }
 //        }
-//        DeterminisationUtilities.reshuffle(playerId,
-//                toReshuffle,
-//                i->true,
-//                redeterminisationRnd
-//        );
+        if(playerId!=-1){
+            DeterminisationUtilities.reshuffle(playerId,
+                    toReshuffle,
+                    i->true,
+                    redeterminisationRnd
+            );
+        }
+
 //
 //        // put player hand cards into deck
 //        for ( int i = 0; i< copy.playerHands.size();i++){
@@ -155,7 +159,7 @@ public class SF18GameState extends AbstractGameState {
 //        }
 //        //shuffle deck
 //        copy.mainDeck.shuffle(redeterminisationRnd);
-////
+//
 //        for ( int i = 0; i< copy.playerHands.size();i++){
 //            if(i != playerId){
 //                Deck<IngredientCard> hand = copy.playerHands.get(i);
@@ -214,14 +218,16 @@ public class SF18GameState extends AbstractGameState {
         if (!(o instanceof SF18GameState)) return false;
         if (!super.equals(o)) return false;
         SF18GameState that = (SF18GameState) o;
-        return playerHands == that.playerHands && playerScores == that.playerScores &&
-                mainDeck == that.mainDeck && discard == that.discard && actionsChosen == that.actionsChosen;
+        return Objects.equals(playerHands,that.playerHands) && Arrays.equals(playerScores, that.playerScores) &&
+                Objects.equals(mainDeck , that.mainDeck) && Objects.equals(discard , that.discard) && Objects.equals(actionsChosen , that.actionsChosen);
+//        return playerHands == that.playerHands && playerScores == that.playerScores &&
+//                mainDeck == that.mainDeck && discard == that.discard && actionsChosen == that.actionsChosen;
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(playerHands,mainDeck,discard,actionsChosen);
-        result = 76*result* Arrays.hashCode(playerScores);
+        result = 76*result + Arrays.hashCode(playerScores);
         return result;
     }
 
