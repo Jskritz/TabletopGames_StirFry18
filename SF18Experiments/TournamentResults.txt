@@ -1,0 +1,137 @@
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.48 +/- 0.10
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.48 +/- 0.10
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.43 +/- 0.10
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.48 +/- 0.10
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.48 +/- 0.10
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.45 +/- 0.10
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.46 +/- 0.10
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.45 +/- 0.10
+
+<<<<<<< Updated upstream
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 30, GamesPerMatchup: 30
+mcts got 30.00 points. mcts won 100.0% of the 30 games of the tournament. mcts won 25.0% of the 120 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.040	Mean Ordinal 2.48 +/- 0.10
+=======
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 10000, GamesPerMatchup: 10000
+mcts got 10000.00 points. mcts won 100.0% of the 10000 games of the tournament. mcts won 25.0% of the 40000 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.002	Mean Ordinal 2.47 +/- 0.01
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 100, GamesPerMatchup: 100
+mcts got 100.00 points. mcts won 100.0% of the 100 games of the tournament. mcts won 25.0% of the 400 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.022	Mean Ordinal 2.48 +/- 0.06
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 10000, GamesPerMatchup: 10000
+mcts got 10000.00 points. mcts won 100.0% of the 10000 games of the tournament. mcts won 25.0% of the 40000 games it played during the tournament.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.002	Mean Ordinal 2.47 +/- 0.01
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 10000, GamesPerMatchup: 10000
+mcts got 10000.00 points. mcts won 100.0% of the 10000 games of the tournament. mcts won 25.0% of the 40000 games it played during the tournament.
+mcts got a mean score of 41.46.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.002	Mean Ordinal 2.47 +/- 0.01
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 1000, GamesPerMatchup: 1000
+mcts got 1000.00 points. mcts won 100.0% of the 1000 games of the tournament. mcts won 25.0% of the 4000 games it played during the tournament.
+mcts got a mean score of 41.23.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.007	Mean Ordinal 2.47 +/- 0.02
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 10000, GamesPerMatchup: 10000
+mcts got 10000.00 points. mcts won 100.0% of the 10000 games of the tournament. mcts won 25.0% of the 40000 games it played during the tournament.
+mcts got a mean score of 41.54.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.002	Mean Ordinal 2.47 +/- 0.01
+>>>>>>> Stashed changes
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 1000, GamesPerMatchup: 1000
+mcts got 1000.00 points. mcts won 100.0% of the 1000 games of the tournament. mcts won 25.0% of the 4000 games it played during the tournament.
+mcts got a mean score of 40.15.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.007	Mean Ordinal 2.47 +/- 0.02
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 5000, GamesPerMatchup: 5000
+mcts got 5000.00 points. mcts won 100.0% of the 5000 games of the tournament. mcts won 25.0% of the 20000 games it played during the tournament.
+mcts got a mean score of 40.04.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.003	Mean Ordinal 2.47 +/- 0.01
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 10000, GamesPerMatchup: 10000
+mcts got 10000.00 points. mcts won 100.0% of the 10000 games of the tournament. mcts won 25.0% of the 40000 games it played during the tournament.
+mcts got a mean score of 40.10.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.002	Mean Ordinal 2.47 +/- 0.01
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 10000, GamesPerMatchup: 10000
+mcts got 10000.00 points. mcts won 100.0% of the 10000 games of the tournament. mcts won 25.0% of the 40000 games it played during the tournament.
+mcts got a mean score of 40.13.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.002	Mean Ordinal 2.47 +/- 0.01
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 1000, GamesPerMatchup: 1000
+mcts got 1000.00 points. mcts won 100.0% of the 1000 games of the tournament. mcts won 25.0% of the 4000 games it played during the tournament.
+mcts got a mean score of 40.00.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.007	Mean Ordinal 2.47 +/- 0.02
+
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 10000, GamesPerMatchup: 10000
+mcts got 10000.00 points. mcts won 100.0% of the 10000 games of the tournament. mcts won 25.0% of the 40000 games it played during the tournament.
+mcts got a mean score of 39.97.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.002	Mean Ordinal 2.47 +/- 0.01
+
