@@ -1,0 +1,9 @@
+{
+  "game": "DominionFirstGame",
+  "playerDirectory" : "SF18Experiments/dominionPlayer",
+  "nPlayers" : 4,
+  "matchups" : 1000,
+  "verbose"  : true,
+  "listener" : "metrics/dominion.json",
+  "destDir" : "SF18Experiments/Dominion"
+}

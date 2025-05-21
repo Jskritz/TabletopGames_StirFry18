@@ -1,0 +1,9 @@
+{
+  "game": "StirFry18",
+  "playerDirectory" : "SF18Experiments/players",
+  "nPlayers" : 4,
+  "matchups" : 10000,
+  "verbose"  : true,
+  "listener" : "metrics/stirfry18.json",
+  "destDir" : "SF18Experiments"
+}
