@@ -1,14 +1,22 @@
 {
   "class": "evaluation.listeners.MetricsGameListener",
-  "args": [
-    {
-      "class" : "evaluation.loggers.SummaryLogger"
-    },
+  "args":  [
+    {"enum" : "evaluation.metrics.IDataLogger$ReportDestination", "value" : "ToFile"},
     [
-      {"class": "games.dominion.stats.DominionMetrics$EmptySupplySlots" },
-      {"class": "games.dominion.stats.DominionMetrics$CardsInSupplyGameEnd",
-        "args": [["ESTATE", "DUCHY", "PROVINCE"]]
-      }
-    ]
-  ]
+      {"enum" : "evaluation.metrics.IDataLogger$ReportType", "value" : "RawDataPerEvent"}
+
+    ],
+    [
+      {"class": "evaluation.metrics.GameMetrics$GameScore" },
+      {"class": "evaluation.metrics.GameMetrics$FinalScore" },
+      {"class": "evaluation.metrics.GameMetrics$StateSpace" },
+      {"class": "evaluation.metrics.GameMetrics$ComputationTimes" },
+      {"class": "evaluation.metrics.GameMetrics$Decisions" },
+      {"class": "evaluation.metrics.GameMetrics$Actions" },
+      {"class": "games.dominion.metrics.DominionMetrics$PreferredCard" },
+      {"class": "games.dominion.metrics.DominionMetrics$CardsInSupplyGameEnd" },
+      {"class": "games.dominion.metrics.DominionMetrics$EmptySupplySlots" },
+      {"class": "games.dominion.metrics.DominionMetrics$GameSeeds" },
+      {"class": "games.dominion.metrics.DominionMetrics$ActionFeatures" }
+    ]]
 }
