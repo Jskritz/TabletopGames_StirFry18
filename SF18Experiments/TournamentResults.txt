@@ -135,3 +135,10 @@ mcts got a mean score of 39.97.
 ---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
 mcts: Win rate 0.25 +/- 0.002	Mean Ordinal 2.47 +/- 0.01
 
+Game: StirFry18, Players: 4, Mode: RANDOM, TotalGames: 100, GamesPerMatchup: 100
+mcts got 100.00 points. mcts won 100.0% of the 100 games of the tournament. mcts won 25.0% of the 400 games it played during the tournament.
+mcts got a mean score of 40.26.
+
+---- Ranking ---- (+/- are standard errors on the mean calculated using a Normal approximation) 
+mcts: Win rate 0.25 +/- 0.022	Mean Ordinal 2.48 +/- 0.06
+
