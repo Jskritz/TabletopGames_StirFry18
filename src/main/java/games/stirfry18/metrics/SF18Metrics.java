@@ -136,10 +136,7 @@ public class SF18Metrics implements IMetricsCollection {
 
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 6bb40438 (Favored cards implemented)
+
     public static class FavoredCards extends AbstractMetric {
         // Get cards that were kept in hand in preference of the discarded card
         @Override
@@ -148,18 +145,6 @@ public class SF18Metrics implements IMetricsCollection {
             columns.put("Discarded card",String.class);
             columns.put("Discard Reason", String.class);
             columns.put("Favored Cards", String.class);
-<<<<<<< HEAD
-=======
-    public static class DiscardedCards extends AbstractMetric {
-
-        @Override
-        public Map<String, Class<?>> getColumns(int nPlayersPerGame, Set<String> playerNames) {
-            Map<String, Class<?>> columns = new HashMap<>();
-            columns.put("Discard Reason", String.class);
-            columns.put("Discarded Card", String.class);
->>>>>>> bb4a8efb (metrics include discarded cards)
-=======
->>>>>>> 6bb40438 (Favored cards implemented)
             return columns;
         }
 
@@ -169,10 +154,6 @@ public class SF18Metrics implements IMetricsCollection {
             SF18GameState gs = (SF18GameState) e.state;
             if(e.action instanceof Discard){
                 Discard action = (Discard)e.action;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 6bb40438 (Favored cards implemented)
                 List<String> cardsKept =new ArrayList<>();
                 String handList="";
                 for(IngredientCard ingredient : gs.getPlayerHands().get(e.playerID)){
@@ -229,40 +210,6 @@ public class SF18Metrics implements IMetricsCollection {
         @Override
         public Set<IGameEvent> getDefaultEventTypes() {
             return Collections.singleton(Event.GameEvent.ACTION_TAKEN);
-<<<<<<< HEAD
-=======
-
-                records.put("Discard Reason", "End of Turn");
-                records.put("Discarded Card", gs.getComponentById(action.discardedCard).toString());
-
-                return true;
-            }
-            else if(e.action instanceof DiscardProtein) {
-                DiscardProtein action = (DiscardProtein)e.action;
-
-                records.put("Discard Reason", "Protein Action");
-                records.put("Discarded Card", gs.getComponentById(action.discardedCard).toString());
-
-                return true;
-
-            } else if(e.action instanceof DiscardIngredient) {
-                DiscardIngredient action = (DiscardIngredient)e.action;
-
-                records.put("Discard Reason", "Ingredient Action");
-                records.put("Discarded Card", gs.getComponentById(action.discardedCards.get(0)).toString());
-                return true;
-            }
-
-            return false;
-
-        }
-
-        @Override
-        public Set<IGameEvent> getDefaultEventTypes() {
-            return Collections.singleton(Event.GameEvent.ACTION_CHOSEN);
->>>>>>> bb4a8efb (metrics include discarded cards)
-=======
->>>>>>> 6bb40438 (Favored cards implemented)
         }
 
     }

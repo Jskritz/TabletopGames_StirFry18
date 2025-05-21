@@ -1,0 +1,20 @@
+{
+  "class": "evaluation.listeners.MetricsGameListener",
+  "args":  [
+    {"enum" : "evaluation.metrics.IDataLogger$ReportDestination", "value" : "ToFile"},
+    [
+      {"enum" : "evaluation.metrics.IDataLogger$ReportType", "value" : "RawDataPerEvent"}
+
+    ],
+    [
+      {"class": "evaluation.metrics.GameMetrics$GameScore" },
+      {"class": "evaluation.metrics.GameMetrics$FinalScore" },
+      {"class": "evaluation.metrics.GameMetrics$StateSpace" },
+      {"class": "evaluation.metrics.GameMetrics$ComputationTimes" },
+      {"class": "evaluation.metrics.GameMetrics$Decisions" },
+      {"class": "evaluation.metrics.GameMetrics$Actions" },
+      {"class": "games.stirfry18.metrics.SF18Metrics$CookList"},
+      {"class": "games.stirfry18.metrics.SF18Metrics$DiscardedCards"},
+      {"class": "games.stirfry18.metrics.SF18Metrics$FavoredCards"}
+    ]]
+}
