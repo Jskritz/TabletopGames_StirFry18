@@ -234,6 +234,41 @@ public class DominionGameState extends AbstractGameState implements IPrintable {
         return (int) allCards.stream().filter(c -> c.cardType() == type).count();
     }
 
+    /**
+     * Utility to get all card types in player ID complete deck (hand+discard+deck+tableaux)
+     */
+    public List<CardType> getCardTypeInDeck(int PlayerID){
+        List<CardType> cardsFound = new ArrayList<>();
+        Deck<DominionCard> hand = getDeck(DeckType.HAND, PlayerID);
+        Deck<DominionCard> deck = getDeck(DeckType.DRAW, PlayerID);
+        Deck<DominionCard> discard = getDeck(DeckType.DISCARD, PlayerID);
+        Deck<DominionCard> table = getDeck(DeckType.TABLE, PlayerID);
+        Map<CardType, Integer> allCards = getCardsIncludedInGame();
+
+        for(CardType cardType : allCards.keySet()){
+            if(allCards.get(cardType) > 0){
+                if(hand.stream().anyMatch(c-> c.cardType() == cardType)){
+                    cardsFound.add(cardType);
+                    continue;
+                }
+                if(deck.stream().anyMatch(c-> c.cardType() == cardType)){
+                    cardsFound.add(cardType);
+                    continue;
+                }
+                if(discard.stream().anyMatch(c-> c.cardType() == cardType)){
+                    cardsFound.add(cardType);
+                    continue;
+                }
+                if(table.stream().anyMatch(c-> c.cardType() == cardType)){
+                    cardsFound.add(cardType);
+                }
+            }
+        }
+
+        return cardsFound;
+    }
+
+
     public List<CardType> getCardsToBuy() {
         return cardsIncludedInGame.keySet().stream()
                 .filter(c -> cardsIncludedInGame.get(c) > 0)
@@ -467,6 +502,8 @@ public class DominionGameState extends AbstractGameState implements IPrintable {
         retValue.append("\n");
         return retValue.toString();
     }
+
+
 
     public enum DominionGamePhase implements IGamePhase {
         Play,
